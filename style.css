@@ -1,0 +1,10 @@
+.value_input {
+    width: 200px;
+    display:block;
+}
+
+.label {
+    width: 120px;
+    text-align: right;
+    display: inline;
+}
