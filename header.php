@@ -7,17 +7,24 @@
         HW4
     </title>
 </head>
-<body style="height: 100%; width:100%;">
-<div>
-    <span>Welcome<?php 
-        if (isset($_SESSION['name'])) {
+<body class="body nomargin nopadding">
+<div style="display: table;" class="fill">
+    <span class="menuItem">Welcome<?php 
+        require_once('utils/db.php');
+        if (isLogged()) {
             echo ', '.$_SESSION['name']; 
+            echo '</span>';
+
+            echo '<span class="menuItem"><a href="search.php">Search</a></span>';
+            echo '<span class="menuItem"><a href="edit_profile.php">Profile</a></span>';
+            echo '<span class="menuItem"><a href="logout.php">Logout</a></span>';
         }
         else {
             echo ', Guest';
+            echo '</span>';
+            echo '<span class="menuItem"><a href="login.php">Login</a></span>';
+            echo '<span class="menuItem"><a href="register.php">Register</a></span>';
+            echo '<span class="menuItem"><a href="passwd_reset.php">Forgotten password</a></span>';
         }
-?> </span>
-    <span>Search</span>
-    <span>Profile</span>
-    <span><a href="logout.php">Logout</a></span>
+?>     
 </div>
