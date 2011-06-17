@@ -1,0 +1,43 @@
+> db.test1.insert({_id : 1, story : "boring" });
+> db.test2.insert({other_id : 1, private_data : "data"});
+> db.test1.find('{id : 1}');                             
+{ "_id" : 1, "story" : "boring" }
+> m = function() {   
+... t = db.test1.find({_id : this.other_id});
+... emit(this.other_id, t.next().story);
+... }
+function () {
+    t = db.test1.find({_id:this.other_id});
+    emit(this.other_id, t.next().story);
+}
+> m
+function () {
+    t = db.test1.find({_id:this.other_id});
+    emit(this.other_id, t.next().story);
+}
+> r = function() {
+... 
+... ^C
+> r = function(key, values) {
+... return values.next();
+... }
+function (key, values) {
+    return values.next();
+}
+> db.test2.mapReduce(m, r, {out : { inline : 1}});
+{
+	"results" : [
+		{
+			"_id" : 1,
+			"value" : "boring"
+		}
+	],
+	"timeMillis" : 509,
+	"counts" : {
+		"input" : 1,
+		"emit" : 1,
+		"output" : 1
+	},
+	"ok" : 1,
+}
+>
