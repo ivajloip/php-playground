@@ -1,23 +1,29 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-17 12:48:31
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-17 20:29:20
          compiled from "add_article.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21020690464dfb4d1fe8eb73-63001711%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:4281665644dfbacb0c74636-01982848%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '451d6a591a25ed14e097d66d1b01869af6dc5c83' => 
     array (
       0 => 'add_article.tpl',
-      1 => 1308314904,
+      1 => 1308339351,
       2 => 'file',
     ),
     'f09b7c3d33a69e95bc9b8df91ac2d1e1a77d758f' => 
     array (
       0 => 'default_form.tpl',
-      1 => 1307376822,
+      1 => 1308340921,
+      2 => 'file',
+    ),
+    '65f25076139b39828eca9453485f43c28a62035e' => 
+    array (
+      0 => 'base.tpl',
+      1 => 1308342351,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21020690464dfb4d1fe8eb73-63001711',
+  'nocache_hash' => '4281665644dfbacb0c74636-01982848',
   'function' => 
   array (
   ),
@@ -26,15 +32,25 @@ $_smarty_tpl->decodeProperties(array (
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
-        <title><?php echo $_smarty_tpl->getVariable('title')->value;?>
+        <title><?php echo $_smarty_tpl->getVariable('title_msg')->value;?>
 </title>
     </head>
     <body>
+        
         <form id="<?php echo $_smarty_tpl->getVariable('form_id')->value;?>
 " action="<?php echo $_smarty_tpl->getVariable('action')->value;?>
 " method="post" class="<?php echo $_smarty_tpl->getVariable('form_class')->value;?>
 ">
             
+            <span class="<?php echo $_smarty_tpl->getVariable('block')->value;?>
+">
+                <label class="<?php echo $_smarty_tpl->getVariable('article_title_label_class')->value;?>
+" for"article_title"><?php echo $_smarty_tpl->getVariable('article_title_msg')->value;?>
+:</label>
+                <input class="<?php echo $_smarty_tpl->getVariable('article_title_class')->value;?>
+" id="article_title" name="article_title" type="text"/>
+            </span>
+
             <span class="<?php echo $_smarty_tpl->getVariable('block')->value;?>
 ">
                 <label class="<?php echo $_smarty_tpl->getVariable('article_label_class')->value;?>
@@ -49,5 +65,6 @@ $_smarty_tpl->decodeProperties(array (
 " id="submit" />
         
         </form>
+    
     </body>
 </html>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-17 13:25:56
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-17 20:45:45
          compiled from "../forms/register_form.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8634626594dfb55e4cd5bb9-77550853%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -19,7 +19,13 @@ $_smarty_tpl->decodeProperties(array (
     'f09b7c3d33a69e95bc9b8df91ac2d1e1a77d758f' => 
     array (
       0 => 'default_form.tpl',
-      1 => 1307376822,
+      1 => 1308340921,
+      2 => 'file',
+    ),
+    '65f25076139b39828eca9453485f43c28a62035e' => 
+    array (
+      0 => 'base.tpl',
+      1 => 1308342351,
       2 => 'file',
     ),
   ),
@@ -32,10 +38,11 @@ $_smarty_tpl->decodeProperties(array (
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
-        <title><?php echo $_smarty_tpl->getVariable('title')->value;?>
+        <title><?php echo $_smarty_tpl->getVariable('title_msg')->value;?>
 </title>
     </head>
     <body>
+        
         <form id="<?php echo $_smarty_tpl->getVariable('form_id')->value;?>
 " action="<?php echo $_smarty_tpl->getVariable('action')->value;?>
 " method="post" class="<?php echo $_smarty_tpl->getVariable('form_class')->value;?>
@@ -82,5 +89,6 @@ $_smarty_tpl->decodeProperties(array (
 " id="submit" />
 
         </form>
+    
     </body>
 </html>

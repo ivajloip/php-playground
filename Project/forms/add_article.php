@@ -2,27 +2,30 @@
     require_once('../utils/help.php');
 
     function generate_article_form() {
-        require_once('../libs/Smarty.class.php');
         $messages = getMessages();
-        $smarty = new Smarty;
-        smartyAssign($smarty, 
-                     array('article_label_msg' => $messages['article_label'],
-                                    'submit_msg' => $messages['submit'],
-                                    'title' => $messages['title'],
-                                    'action' => "../forms/add_article.php"));
-        $smarty->display("add_article.tpl");
+        $vars = getMessagesForArray(
+                    array('article_label', 'article_title', 'submit', 'title'));
+
+        $vars += array('action' => "../forms/add_article.php");
+        genericSmartyDisplay($vars, "add_article.tpl");
     }
 
     function parse_article_from_post() {
         if(is_empty($_POST['article'])) {
             return NULL;
         }
-        return array('article' => $_POST['article'], 
-                                 'publisher_id' => $_SESSION['id'],
-                                 'publisher_name' => $_SESSION['display_name']
+        return array('article' =>  htmlspecialchars($_POST['article'], ENT_QUOTES), 
+                     'article_title' => $_POST['article_title'],
+                     'publisher_id' => $_SESSION['id'],
+                     'publisher_name' => $_SESSION['display_name']
                ) + 
-               array('published_date' => new MongoDate(time()), 'liked' => array(), 'disliked' => array());
-
+               array('published_date' => new MongoDate(time()), 
+                     'liked' => array(), 
+                     'liked_count' => 0,
+                     'disliked' => array(),
+                     'disliked_count' => 0,
+                     'comments' => array(),
+                     'active' => true);
     }
 
     function submit_article() {

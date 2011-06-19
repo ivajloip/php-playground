@@ -1,4 +1,6 @@
 <?php
+    require_once('../utils/db.php');
+
     $messages = NULL;
     define('SALT_LENGTH', 10);
 
@@ -23,7 +25,7 @@
             return NULL;
         }
         return array('username' => $_POST['username'], 
-                     'passwd' => generateHash($_POST['password'], $_POST['username']));
+                     'password' => generateHash($_POST['password'], $_POST['username']));
     }
 
     function parse_user_reg_info_from_post() {
@@ -32,11 +34,12 @@
             return NULL;
         }
         return array('username' => $_POST['username'], 
-                     'passwd' => generateHash($_POST['password'], $_POST['username']),
+                     'password' => generateHash($_POST['password'], $_POST['username']),
                      'display_name' => $_POST['username'],
                      'email' => $_POST['email'],
-                     'is_admin' => 'false',
-                     'is_moderator' => 'false');
+                     'is_admin' => false,
+                     'is_moderator' => false,
+                     'active' => true);
 
     }
 
@@ -76,25 +79,15 @@
         redirect2('login_form.php');
     }
 
-    function generateHash($plain, $username, $salt = NULL) {
-         if ($salt === NULL)
-         {
-             $salt = substr(md5($username), 0, SALT_LENGTH / 2) . substr(md5($plain), 0, SALT_LENGTH / 2);
-         }
-         else
-         {
-             $salt = substr($salt, 0, SALT_LENGTH);
-         }
-        return $salt . sha1($salt . $plainText);
-    }
-
     function Login($id, $display_name) {
         session_start();
         $_SESSION['id'] = $id;
         $_SESSION['display_name'] = $display_name; 
     }
 
-    function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, $exec_if_not_logged = redirect2Login, $exec_otherwise = redirect2Home) {
+    function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, 
+                $exec_if_not_logged = redirect2Login, $exec_otherwise = redirect2Home) {
+
         if(!isLoggedId() && !isFormSubmitted()) {
             if($exec_if_not_logged != NULL) {
                 $exec_if_not_logged();
@@ -119,5 +112,22 @@
                 return;
             }
         }
+    }
+
+    function genericSmartyDisplay($vars, $page) {
+        require_once('../libs/Smarty.class.php');
+        $smarty = new Smarty;
+        smartyAssign($smarty, $vars);
+        $smarty->display($page);
+        return $smarty;
+    }
+
+    function getMessagesForArray($array) {
+        $result = array();
+        $messages = getMessages();
+        foreach($array as $value) {
+            $result[$value.'_msg'] = $messages[$value];
+        }
+        return $result;
     }
 ?>

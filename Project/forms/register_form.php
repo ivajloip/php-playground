@@ -2,17 +2,11 @@
     require_once('../utils/help.php');
 
     function generateRegisterForm() {
-        require_once('../libs/Smarty.class.php');
         $messages = getMessages();
-        $smarty = new Smarty;
-        smartyAssign($smarty, array('login_msg' => $messages['login'], 
-                                    'password_msg' => $messages['passwd'],
-                                    'confirm_password_msg' => $messages['confirm_password'],
-                                    'email_msg' => $messages['email'],
-                                    'submit_msg' => $messages['submit'],
-                                    'title' => $messages['title'],
-                                    'action' => "../forms/register_form.php"));
-        $smarty->display("../forms/register_form.tpl");
+        $vars = getMessagesForArray(array('login', 'password', 
+                    'confirm_password', 'email', 'submit', 'title'));
+        $vars += array('action' => "../forms/register_form.php");
+        genericSmartyDisplay($vars, "../forms/register_form.tpl");
     }
 
     function register_user() {
@@ -37,14 +31,4 @@
     }
 
     genericRequestHandler(register_user, redirect2Login, generateRegisterForm);
-
-/*    if(!isFormSubmitted() && !isLoggedId()) {a
-        generateRegisterForm();
-    }
-    else if(isFormSubmitted()){
-        register_user();
-    }
-    else {
-        redirect2Home();
-    }*/
 ?>
