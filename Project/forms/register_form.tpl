@@ -6,6 +6,9 @@
             </span>
             <span class="{$block}">
                 <label class="{$label_class}" for"email">{$email_msg}:</label>
-                <input class="{$input_class}" type="text" name="email" id="email">
+                <input class="{$input_class}" type="text" name="email" 
+                    id="email" value="{$email_value}">
             </span>
+
+            {block name=user_info}{/block}
         {/block}

@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-19 12:34:44
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-21 13:10:47
          compiled from "../forms/view_article.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17171399554dfdece4c5b9c1-38258698%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1219510384e0098579b0e35-50708342%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5d40c0c97663f1f0d0ff52f536ba1cc53385fb2a' => 
     array (
       0 => '../forms/view_article.tpl',
-      1 => 1308486882,
+      1 => 1308661841,
       2 => 'file',
     ),
     '65f25076139b39828eca9453485f43c28a62035e' => 
@@ -17,7 +17,7 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17171399554dfdece4c5b9c1-38258698',
+  'nocache_hash' => '1219510384e0098579b0e35-50708342',
   'function' => 
   array (
   ),
@@ -53,6 +53,19 @@ $_smarty_tpl->decodeProperties(array (
 : <?php echo $_smarty_tpl->getVariable('article')->value['disliked_count'];?>
 
         </div>
+
+        <div id="like_dislike_buttons">
+            <form id="like_form" action="like.php" method="post">
+                <input type="hidden" value="<?php echo $_smarty_tpl->getVariable('article')->value['_id'];?>
+" name="articleId"/>
+                <input type="hidden" value="article" name="type"/>
+                <input type="submit" value="<?php echo $_smarty_tpl->getVariable('liked_msg')->value;?>
+" name="like">
+                <input type="submit" value="<?php echo $_smarty_tpl->getVariable('disliked_msg')->value;?>
+" name="dislike">
+            </form>
+        </div>
+
 
         <div>
             <form id="<?php echo $_smarty_tpl->getVariable('form_id')->value;?>
@@ -94,11 +107,19 @@ if ($_smarty_tpl->_count($_from) > 0){
 "><div class="<?php echo $_smarty_tpl->getVariable('comment_content')->value;?>
 "><?php echo $_smarty_tpl->tpl_vars['comment']->value['comment'];?>
 </div><div class="<?php echo $_smarty_tpl->getVariable('comment_info')->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['comment']->value['publisher_name'];?>
+"><?php echo $_smarty_tpl->getVariable('author_msg')->value;?>
+ <?php echo $_smarty_tpl->tpl_vars['comment']->value['publisher_name'];?>
+<?php echo $_smarty_tpl->getVariable('published_date_mgs')->value;?>
  <?php echo $_smarty_tpl->tpl_vars['comment']->value['published_date'];?>
+<?php echo $_smarty_tpl->getVariable('liked_msg')->value;?>
  <?php echo $_smarty_tpl->tpl_vars['comment']->value['liked_count'];?>
+<?php echo $_smarty_tpl->getVariable('disliked_msg')->value;?>
  <?php echo $_smarty_tpl->tpl_vars['comment']->value['disliked_count'];?>
-</div></td></tr>
+<form id="like_form" action="like.php" method="post"><input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['comment']->value['_id'];?>
+" name="commentId"/><input type="hidden" value="<?php echo $_smarty_tpl->getVariable('article')->value['_id'];?>
+" name="articleId"/><input type="hidden" value="comment" name="type"/><input type="submit" value="<?php echo $_smarty_tpl->getVariable('liked_msg')->value;?>
+" name="like"><input type="submit" value="<?php echo $_smarty_tpl->getVariable('disliked_msg')->value;?>
+" name="dislike"></form></div></td></tr>
             <?php }} ?>
         </table>
     

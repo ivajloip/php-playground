@@ -4,18 +4,18 @@
     function generate_article_form() {
         $messages = getMessages();
         $vars = getMessagesForArray(
-                    array('article_label', 'article_title', 'submit', 'title'));
+                    array('article_label', 'article_title', 'submit'));
 
         $vars += array('action' => "../forms/add_article.php");
         genericSmartyDisplay($vars, "add_article.tpl");
     }
 
     function parse_article_from_post() {
-        if(is_empty($_POST['article'])) {
+        if(isEmpty($_POST['article'])) {
             return NULL;
         }
         return array('article' =>  htmlspecialchars($_POST['article'], ENT_QUOTES), 
-                     'article_title' => $_POST['article_title'],
+                     'article_title' => htmlspecialchars($_POST['article_title'], ENT_QUOTES),
                      'publisher_id' => $_SESSION['id'],
                      'publisher_name' => $_SESSION['display_name']
                ) + 
@@ -45,7 +45,7 @@
             generate_article_form();
             return false;
         }
-        // view article
+        redirect2('../forms/view_article.php?id=' . $article['_id']);
         return true;
     }
 

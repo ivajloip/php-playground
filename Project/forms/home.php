@@ -1,3 +1,10 @@
 <?php
-    echo("Not implemented yet");
+    require_once('../utils/help.php');
+    require_once('../utils/db.php');
+
+
+    $vars = getMessagesForArray(array('avatar'));
+    $file = getFile(getAvatarFileName());
+    $vars += array('mime_type' => $file->file['type'], 'content' => base64_encode($file->getBytes()));
+    genericSmartyDisplay($vars, '../forms/home.tpl');
 ?>    

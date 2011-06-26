@@ -15,6 +15,16 @@
             {$liked_msg}: {$article.liked_count} {$disliked_msg}: {$article.disliked_count}
         </div>
 
+        <div id="like_dislike_buttons">
+            <form id="like_form" action="like.php" method="post">
+                <input type="hidden" value="{$article._id}" name="articleId"/>
+                <input type="hidden" value="article" name="type"/>
+                <input type="submit" value="{$liked_msg}" name="like">
+                <input type="submit" value="{$disliked_msg}" name="dislike">
+            </form>
+        </div>
+
+
         <div>
             <form id="{$form_id}" action="{$action}" method="post" class="{$form_class}">
                 <span class="{$block}">
@@ -40,7 +50,17 @@
                         {$comment.comment}
                     </div>
                     <div class="{$comment_info}">
-                        {$comment.publisher_name} {$comment.published_date} {$comment.liked_count} {$comment.disliked_count}
+                        {$author_msg} {$comment.publisher_name} 
+                        {$published_date_mgs} {$comment.published_date}
+                        {$liked_msg} {$comment.liked_count} 
+                        {$disliked_msg} {$comment.disliked_count}
+                        <form id="like_form" action="like.php" method="post">
+                            <input type="hidden" value="{$comment._id}" name="commentId"/>
+                            <input type="hidden" value="{$article._id}" name="articleId"/>
+                            <input type="hidden" value="comment" name="type"/>
+                            <input type="submit" value="{$liked_msg}" name="like">
+                            <input type="submit" value="{$disliked_msg}" name="dislike">
+                        </form>
                     </div>
                 </td>
             </tr>

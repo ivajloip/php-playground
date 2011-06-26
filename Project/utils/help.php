@@ -4,24 +4,23 @@
     $messages = NULL;
     define('SALT_LENGTH', 10);
 
-    function is_empty($str) {
-        return NULL == $str || "" == $str;
+    function isEmpty($str) {
+        return NULL == $str || '' == $str;
     }
 
-    function getMessages($filename = "../forms/messages.ini") {
+    function getMessages($filename = '../forms/messages.ini') {
         global $messages;
         if($messages == NULL) {
             $messages = parse_ini_file($filename);
-
             if(!$messages) {
-                die("Server error, missing localization files");
+                die('Server error, missing localization files');
             }
         }
         return $messages;
     }
 
     function parse_user_and_password_from_post() {
-        if(is_empty($_POST['username']) || is_empty($_POST['password'])) {
+        if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
             return NULL;
         }
         return array('username' => $_POST['username'], 
@@ -29,7 +28,7 @@
     }
 
     function parse_user_reg_info_from_post() {
-        if(is_empty($_POST['username']) || is_empty($_POST['password']) || is_empty($_POST['confirm_password']) || is_empty($_POST['email']) 
+        if(isEmpty($_POST['username']) || isEmpty($_POST['password']) || isEmpty($_POST['confirm_password']) || isEmpty($_POST['email']) 
             || $_POST['password'] != $_POST['confirm_password']) {
             return NULL;
         }
@@ -71,7 +70,7 @@
     }
 
     function redirect2($path) {
-         header("Location: ".$path);
+         header('Location: '.$path);
          die($messages['error_general']);
     }
 
@@ -117,6 +116,7 @@
     function genericSmartyDisplay($vars, $page) {
         require_once('../libs/Smarty.class.php');
         $smarty = new Smarty;
+        $vars += getMessagesForArray(array('title'));
         smartyAssign($smarty, $vars);
         $smarty->display($page);
         return $smarty;
@@ -129,5 +129,48 @@
             $result[$value.'_msg'] = $messages[$value];
         }
         return $result;
+    }
+
+    function removeValueFromArray(array &$array, $value) {
+        $key = array_search($value, $array);
+        if($key !== FALSE) {
+            unset($array[$key]);
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    function uploadFile() {
+        // no file was uploaded - it's ok
+        if($_FILES['avatar']['error'] == 4) {
+            return 'OK';
+        }
+
+        $limit = 200000;
+        if ($_FILES['avatar']['size'] < $limit) {
+            if ($_FILES['avatar']['error'] > 0) {
+                return 'Error :' . $_FILES['avatar']['error'] . '<br />';
+            } else {
+                $fileTmpName = $_FILES['avatar']['tmp_name'];
+                $filePath = getAvatarFileName();
+                if(move_uploaded_file($fileTmpName, $filePath)) {
+                    if(saveFile($filePath)) {
+                        return 'OK';
+                    } else {
+                        return 'error_db_filesave';
+                    }
+                }
+                else {
+                    return 'error_move_failed';
+                }
+            }
+        } else {
+            return 'error_file_size';
+        }
+    }
+
+    function getAvatarFileName() {
+        session_start();
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $_SESSION['id'] . '_avatar';
     }
 ?>

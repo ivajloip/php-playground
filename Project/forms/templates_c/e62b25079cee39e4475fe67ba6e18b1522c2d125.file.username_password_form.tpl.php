@@ -1,19 +1,19 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-17 20:46:52
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-25 23:11:51
          compiled from "../forms/username_password_form.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20864409104decfb79237cf0-01417550%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15878676854e066b3729b5f3-28352762%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e62b25079cee39e4475fe67ba6e18b1522c2d125' => 
     array (
       0 => '../forms/username_password_form.tpl',
-      1 => 1307376503,
+      1 => 1309043482,
       2 => 'file',
     ),
     'f09b7c3d33a69e95bc9b8df91ac2d1e1a77d758f' => 
     array (
       0 => 'default_form.tpl',
-      1 => 1308340921,
+      1 => 1309020058,
       2 => 'file',
     ),
     '65f25076139b39828eca9453485f43c28a62035e' => 
@@ -23,7 +23,7 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20864409104decfb79237cf0-01417550',
+  'nocache_hash' => '15878676854e066b3729b5f3-28352762',
   'function' => 
   array (
   ),
@@ -40,16 +40,27 @@ $_smarty_tpl->decodeProperties(array (
         <form id="<?php echo $_smarty_tpl->getVariable('form_id')->value;?>
 " action="<?php echo $_smarty_tpl->getVariable('action')->value;?>
 " method="post" class="<?php echo $_smarty_tpl->getVariable('form_class')->value;?>
-">
+" enctype="multipart/form-data">
             
+
             <span class="<?php echo $_smarty_tpl->getVariable('block')->value;?>
 ">
-                <label class="<?php echo $_smarty_tpl->getVariable('label_class')->value;?>
+                <?php if ($_smarty_tpl->getVariable('username_show')->value!='false'){?>
+                    <label class="<?php echo $_smarty_tpl->getVariable('label_class')->value;?>
 " for="username"><?php echo $_smarty_tpl->getVariable('login_msg')->value;?>
 :</label>
-                <input class="<?php echo $_smarty_tpl->getVariable('input_class')->value;?>
-" type="text" name="username" id="username" />
+                    <input class="<?php echo $_smarty_tpl->getVariable('input_class')->value;?>
+" type="text" 
+                    name="username" id="username" value="<?php echo $_smarty_tpl->getVariable('username_value')->value;?>
+"/>
+                <?php }else{ ?>
+                    <input class="<?php echo $_smarty_tpl->getVariable('input_class')->value;?>
+" type="hidden" 
+                        name="username" id="username" value="<?php echo $_smarty_tpl->getVariable('username_value')->value;?>
+"/>
+                <?php }?>
             </span>
+
             <span class="<?php echo $_smarty_tpl->getVariable('block')->value;?>
 ">
                 <label class="<?php echo $_smarty_tpl->getVariable('label_class')->value;?>

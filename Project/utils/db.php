@@ -3,7 +3,7 @@
     function connect($config_file = '/home/project/connection.ini') {
         $config = parse_ini_file($config_file);
         $auth = "";
-        if(!is_empty($config['username'])) {
+        if(!isEmpty($config['username'])) {
             $auth = $config['username'].':'.$config['password'].'@';
         }
         $conn = new Mongo('mongodb://'.$auth.$config['url'].':'.$config['port']);
@@ -40,6 +40,16 @@
         return true;
     }
 
+    function save($collection, $array, $save = true) {
+        try {
+            $collection->save($array, array('safe' => $safe));
+        }
+        catch(MongoCursorException $e) {
+            return false;
+        }
+        return true;
+    }
+
     function findAll($collection) {
         return $collection->find();
     }
@@ -57,4 +67,85 @@
         $db = getConnection();
         return findById($id, $db->articles);
     }
+
+    function likeArticle($articleId, $userId) {
+        $article = findArticleById($articleId);
+        if(vote($article, 'liked', 'disliked', $userId)) {
+            $db = getConnection();
+            $articles = $db->articles;
+            save($articles, $article);
+        }
+    }
+
+    function likeComment($articleId, $commentId, $userId) {
+        voteForComment($articleId, $commentId, $userId, 'liked', 'disliked');
+    }
+
+    function dislikeArticle($articleId, $userId) {
+        $article = findArticleById($articleId);
+        if(vote($article, 'disliked', 'liked', $userId)) {
+            $db = getConnection();
+            $articles = $db->articles;
+            save($articles, $article);
+        }
+    }
+
+    function dislikeComment($articleId, $commentId, $userId) {
+        voteForComment($articleId, $commentId, $userId, 'disliked', 'liked');
+    }
+
+    function vote(&$item, $forKey, $otherKey, $userId) {
+        $for = $item[$forKey];
+        if(in_array($userId, $for)) {
+            return FALSE;
+        }
+
+        require_once('../utils/help.php');
+        if(removeValueFromArray($item[$otherKey], $userId)) {
+            $item[$otherKey . '_count'] -= 1;
+        }
+
+        $item[$forKey][] = $userId;
+        $item[$forKey . '_count'] += 1;
+        return $item;
+    }
+
+    function findCommentById($comments, $commentId) {
+        foreach($comments as $key => $comment) {
+            if($comment['_id'] == $commentId) {
+                return $key;
+            }
+        }
+        return NULL;
+    }
+
+    function voteForComment($articleId, $commentId, $userId, $action, $anti_action) {
+        $article = findArticleById($articleId);
+        $comments = $article['comments'];
+        $commentKey = findCommentById($comments, $commentId);
+        if(!is_null($commentKey)) {
+            if(vote($comments[$commentKey], $action, $anti_action, $userId) !== FALSE) {
+                $article['comments'] = $comments;
+                $db = getConnection();
+                $articles = $db->articles;
+                save($articles, $article);
+            }
+        }
+    }
+
+    function saveFile($filePath) {
+        $type = mime_content_type($filePath);
+        var_dump($type);
+        $db = getConnection();
+        $grid = $db->getGridFS();
+        $grid->storeFile($filePath, array('type' => $type, '_id' => $filePath), array('safe' => $safe));
+        return true;
+    }
+
+    function getFile($fileName) {
+        $db = getConnection();
+        $grid = $db->getGridFS();
+        return $grid->findOne(array('_id' => $fileName));
+    }
+
 ?>

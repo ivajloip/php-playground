@@ -3,7 +3,15 @@
     require_once('../utils/db.php');
     $article_id = $_GET['id'];
     $article = findArticleById($article_id);
-    $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', 'submit', 'title'));
-    $vars += array('article' => $article, 'action' => '../forms/add_comment.php');
+    if($article == NULL) {
+        die("Article not found");
+    }
+    $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', 'submit', 'title', 'author', 'published_date'));
+    $comments = $article['comments'];
+    foreach($comments as &$comment) {
+        $comment['published_date'] = date('h:i:s M d, Y', $comment['published_date']->sec);
+    }
+    $article['comments'] = $comments;
+    $vars += array('article' => $article, 'action' => '../forms/add_comment.php?id=' . $article_id);
     genericSmartyDisplay($vars, '../forms/view_article.tpl');
 ?>
