@@ -6,7 +6,7 @@
     </span>
     <br>
     <span class="login_form">
-       <label class="label_class" for"password">{$password_msg}:</label>
+       <label class="label_class" for="password">{$password_msg}:</label>
        <input class="input_class" type="password" name="login_password" id="password">
     </span>
     <br>
@@ -14,7 +14,7 @@
 {/block}
 {block name=forgotten_form}
       <span class="modal_template">
-                <label class="label" for"email">{$email_msg}:</label>
+                <label class="label" for="email">{$email_msg}:</label>
              	<input class="input" type="text" name="email" id="email">
 		<br>
       </span>

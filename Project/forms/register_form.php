@@ -5,7 +5,10 @@
         $messages = getMessages();
         $vars = getMessagesForArray(array('login', 'password', 
                     'confirm_password', 'email', 'submit', 'title'));
-        $vars += array('action' => "../forms/register_form.php");
+        $vars += array('action' => "../forms/register_form.php",
+		       'input_class' => 'input',
+		       'label_class' => 'label',
+		       'block' => 'modal_template');
         genericSmartyDisplay($vars, "../forms/register_form.tpl");
     }
 
