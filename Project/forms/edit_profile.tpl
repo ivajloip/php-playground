@@ -24,4 +24,24 @@
                 <input id="avatar" type="file" name="avatar"/> 
 		    </span>
 
+            {if $admin_view eq true}
+		    <span class="block">
+		        <label for="is_admin" class="{$label_class}">{$is_admin_msg}</label>
+		        <input type="checkbox" name="is_admin" value="true" id="is_admin" class="{$input_class}" 
+                    {$is_admin_checked} />
+		    </span>
+
+		    <span class="block">
+		        <label for="is_moderator" class="{$label_class}">{$is_moderator_msg}</label>
+		        <input type="checkbox" name="is_moderator" value="true" id="is_moderator" class="{$input_class}" 
+                    {$is_moderator_checked} />
+		    </span>
+
+            {/if}
+		    <span class="block">
+		        <label for="is_active" class="{$label_class}">{$is_active_msg}</label>
+		        <input type="checkbox" name="is_active" value="true" id="is_active" class="{$input_class}" 
+                    {$is_active_checked} />
+		    </span>
+
             {/block}

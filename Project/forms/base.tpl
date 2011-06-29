@@ -2,13 +2,15 @@
 <html>
     <head>
         <title>{$title_msg}</title>
-	<link href="../css/modal.css" rel="stylesheet" type="text/css"></link>
-	<link href="../css/header_style.css" rel="stylesheet" type="text/css"></link>
-	<script src="../js/jquery-1.3.2.js" type="text/javascript"></script>
-	<script src="../js/drop_down_menu.js" type="text/javascript"></script>
-	<script src="../js/modal.js" type="text/javascript"></script>
-	<script src="../js/description.js" type="text/javascript"></script>
-	<script src="../js/ajax_requests.js" type="text/javascript"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {block name=head}{/block}
+  	    <link href="../css/modal.css" rel="stylesheet" type="text/css"></link>
+    	<link href="../css/header_style.css" rel="stylesheet" type="text/css"></link>
+	    <script src="../js/jquery-1.3.2.js" type="text/javascript"></script>
+	    <script src="../js/drop_down_menu.js" type="text/javascript"></script>
+	    <script src="../js/modal.js" type="text/javascript"></script>
+	    <script src="../js/description.js" type="text/javascript"></script>
+	    <script src="../js/ajax_requests.js" type="text/javascript"></script>
         {block name=head}{/block}
     </head>
     <body>
@@ -46,6 +48,9 @@
 		</ul>
 	</div>
 	</div>
-       <div id="myDiv"> {block name=body}{/block}</div>
+       <div id="myDiv"> 
+            <p id="error">{$error_msg}</p>
+            {block name=body}{/block}
+       </div>
     </body>
 </html>

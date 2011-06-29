@@ -1,11 +1,11 @@
 <?php
     require_once('../utils/help.php');
 
-    function parse_comment_from_post() {
+    function parseCommentFromPost() {
         if(isEmpty($_POST['comment'])) {
             return NULL;
         }
-        return array('comment' =>  htmlspecialchars($_POST['comment'], ENT_QUOTES), 
+        return array('comment' =>  addImageTags(htmlspecialchars($_POST['comment'], ENT_QUOTES)), 
                      'publisher_id' => $_SESSION['id'],
                      'publisher_name' => $_SESSION['display_name']
                ) + 
@@ -18,13 +18,13 @@
                      'active' => true);
     }
 
-    function submit_comment() {
+    function submitComment() {
         require_once('../utils/db.php');
         $messages = getMessages();
         $article_id = $_GET['id'];
         $article = findArticleById($article_id);
         $comments = $article['comments'];
-        $comment = parse_comment_from_post();
+        $comment = parseCommentFromPost();
         if($comment == NULL) {
             echo($messages['error_registering_user']);
             return false;
@@ -43,7 +43,7 @@
     if(!isLoggedId()) {
         redirect2Login();
     } else if(isFormSubmitted()) {
-        submit_comment();
+        submitComment();
         redirect2('../forms/view_article.php?id=' . $_GET['id']);
     }
 ?>

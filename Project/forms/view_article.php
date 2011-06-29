@@ -6,6 +6,8 @@
     if($article == NULL) {
         die("Article not found");
     }
+
+    $article['published_date'] = date('h:i:s M d, Y', $article['published_date']->sec);
     $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', 'submit', 'title', 'author', 'published_date'));
     $comments = $article['comments'];
     foreach($comments as &$comment) {

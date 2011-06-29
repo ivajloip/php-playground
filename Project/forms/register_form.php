@@ -1,14 +1,15 @@
 <?php
     require_once('../utils/help.php');
 
-    function generateRegisterForm() {
+    function generateRegisterForm($error = NULL) {
         $messages = getMessages();
         $vars = getMessagesForArray(array('login', 'password', 
                     'confirm_password', 'email', 'submit', 'title'));
         $vars += array('action' => "../forms/register_form.php",
 		       'input_class' => 'input',
 		       'label_class' => 'label',
-		       'block' => 'modal_template');
+		       'block' => 'modal_template',
+                       'error_msg' => $error);
         genericSmartyDisplay($vars, "../forms/register_form.tpl");
     }
 
@@ -19,13 +20,11 @@
         $users = $db->users;
         $user = parse_user_reg_info_from_post();
         if($user == NULL) {
-            echo($messages['error_registering_user']);
-            generateRegisterForm();
+            generateRegisterForm($messages['error_registering_user']);
             return false;
         }
         if(!insert($users, $user)) {
-            echo($messages['error_dublicating_user_info']);
-            generateRegisterForm();
+            generateRegisterForm($messages['error_dublicating_user_info']);
             return false;
         }
         login($user['_id'], $user['display_name']);

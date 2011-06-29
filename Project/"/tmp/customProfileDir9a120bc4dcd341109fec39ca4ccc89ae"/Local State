@@ -1,0 +1,42 @@
+{
+   "browser": {
+      "last_redirect_origin": ""
+   },
+   "local_state": {
+      "multiple_profile_prefs_version": 3
+   },
+   "ntp": {
+      "promo_locale": "en-US",
+      "promo_version": 1
+   },
+   "shutdown": {
+      "num_processes": 0,
+      "num_processes_slow": 0,
+      "type": 0
+   },
+   "uninstall_metrics": {
+      "installation_date2": "1309291285",
+      "launch_count": "1"
+   },
+   "user_experience_metrics": {
+      "session_id": 0,
+      "stability": {
+         "breakpad_registration_fail": 1,
+         "breakpad_registration_ok": 0,
+         "crash_count": 0,
+         "debugger_not_present": 1,
+         "debugger_present": 0,
+         "exited_cleanly": true,
+         "incomplete_session_end_count": 0,
+         "last_timestamp_sec": "1309291297",
+         "launch_count": 1,
+         "launch_time_sec": "1309291285",
+         "page_load_count": 0,
+         "renderer_crash_count": 0,
+         "renderer_hang_count": 0,
+         "session_end_completed": true,
+         "stats_buildtime": "1307960690",
+         "stats_version": "12.0.742.100-64"
+      }
+   }
+}

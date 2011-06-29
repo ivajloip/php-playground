@@ -1,12 +1,12 @@
 <?php
     require_once('../utils/help.php');
 
-    function generate_article_form() {
-        $messages = getMessages();
+    function generate_article_form($error = NULL) {
         $vars = getMessagesForArray(
                     array('article_label', 'article_title', 'submit'));
 
-        $vars += array('action' => "../forms/add_article.php");
+        $vars += array('action' => '../forms/add_article.php',
+                       'error_msg' => $error);
         genericSmartyDisplay($vars, "add_article.tpl");
     }
 
@@ -14,7 +14,7 @@
         if(isEmpty($_POST['article'])) {
             return NULL;
         }
-        return array('article' =>  htmlspecialchars($_POST['article'], ENT_QUOTES), 
+        return array('article' =>  addImageTags(htmlspecialchars($_POST['article'], ENT_QUOTES)), 
                      'article_title' => htmlspecialchars($_POST['article_title'], ENT_QUOTES),
                      'publisher_id' => $_SESSION['id'],
                      'publisher_name' => $_SESSION['display_name']
@@ -35,14 +35,12 @@
         $articles = $db->articles;
         $article = parse_article_from_post();
         if($article == NULL) {
-            echo($messages['error_registering_user']);
-            generate_article_form();
+            generate_article_form($messages['error_submitting_article']);
             return false;
         }
         $inserted = insert($articles, $article);
         if(!inserted) {
-            echo($messages['error_publishing']);
-            generate_article_form();
+            generate_article_form($messages['error_publishing']);
             return false;
         }
         redirect2('../forms/view_article.php?id=' . $article['_id']);

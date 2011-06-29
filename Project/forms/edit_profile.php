@@ -2,20 +2,34 @@
     require_once('../utils/help.php');
     require_once('../utils/db.php');
 
+    function getId() {
+        if($_SESSION['admin'] == TRUE && isset($_GET['id'])) {
+            return new MongoId($_GET['id']);
+        }
+        return $_SESSION['id'];
+    }
+
     function generateEditProfileForm() {
-        $db = getConnection();
-        $user = findById($_SESSION['id'], $db->users);
+        $id = getId();
+        $user = findUserById($id);
 
         $vars = getMessagesForArray(array('login', 'password', 'display_name',
-                    'confirm_password', 'email', 'submit', 'avatar', 'male', 'female'));
-        $vars += array('action' => '../forms/edit_profile.php', 
+                    'confirm_password', 'email', 'submit', 'avatar', 'male',
+                    'female', 'is_admin', 'is_moderator', 'is_active'));
+        $vars += array('action' => '../forms/edit_profile.php?id=' . $id, 
                        'username_show' => 'false',
                        'max_file_size' => '200000',
                        'username_value' => $user['username'],
                        'email_value' => $user['email'],
                        'display_name_value' => $user['display_name'],
                        'male_checked' => $user['sex'] == 'male' ? 'checked' : '',
-                       'female_checked' => $user['sex'] != 'male' ? 'checked' : '');
+                       'female_checked' => 
+                            $user['sex'] == 'female' ? 'checked' : '',
+                       'admin_view' => isAdmin(),
+                       'is_admin_checked' => $user['is_admin'] ? 'checked' : '', 
+                       'is_moderator_checked' => 
+                            $user['is_moderator'] ? 'checked' : '',
+                       'is_active_checked' => $user['active'] ? 'checked' : '');
         genericSmartyDisplay($vars, "../forms/edit_profile.tpl");
     }
 
@@ -41,6 +55,26 @@
         if(!isEmpty($_POST['sex'])) {
             $result['sex'] = $_POST['sex'];
         }
+        if(isAdmin() && !isEmpty($_POST['is_admin']) 
+                && $_POST['is_admin'] == 'true') {
+            $result['is_admin'] = true;
+        }
+        else {
+            $result['is_admin'] = false;
+        }
+        if(isAdmin() && 
+                !isEmpty($_POST['is_moderator']) && $_POST['is_moderator'] == 'true') {
+            $result['is_moderator'] = true;
+        }
+        else {
+            $result['is_moderator'] = false;
+        }
+        if(!isEmpty($_POST['is_active']) && $_POST['is_active'] == 'true') {
+            $result['active'] = true;
+        }
+        else {
+            $result['active'] = false;
+        }
 
         return $result;
     }
@@ -58,7 +92,11 @@
         else {
             $update['avatar'] = true;
         }
-        $users->update(array('_id' => $_SESSION['id']), array('$set' => $update));
+        $id = getId();
+        $users->update(array('_id' => $id), array('$set' => $update));
+        if($_SESSION['display_name'] != $update['display_name']) {
+            updateDisplayName($update['display_name'], $id);
+        }
         redirect2Home();
         return true;
     }

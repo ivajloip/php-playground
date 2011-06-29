@@ -1,10 +1,11 @@
 <?php
     require_once('../utils/help.php');
-    function generateLoginForm() {
-        $messages = getMessages();
+
+    function generateLoginForm($error = NULL) {
         $vars = getMessagesForArray(
                     array('login', 'password', 'submit', 'title'));
-        $vars += array('action' => "../forms/login_form.php");
+        $vars += array('action' => '../forms/login_form.php',
+                       'error_msg' => $error);
         genericSmartyDisplay($vars, "../forms/username_password_form.tpl");
     }
 
@@ -13,18 +14,17 @@
         $db = connect();
         $users = $db->users;
         $user = parse_user_and_password_from_post();
+        $messages = getMessages();
         if($user == NULL) {
-            echo($messages['error_required_value']);
-            generateLoginForm();
+            generateLoginForm($messages['error_required_value']);
             return;
         }
-        $result = $users->findOne(array('username' => $user['username'], 'password' => $user['password']));
+        $result = $users->findOne(array('username' => $user['username'], 'password' => $user['password'], 'active' => true));
         if($result == NULL) {
-            echo 'Incorrect Login information <br/>';
-            generateLoginForm();
+            generateLoginForm($messages['error_incorrect_login']);
             return;
         }
-        login($result['_id'], $result['display_name']);
+        login($result['_id'], $result['display_name'], $result['is_admin'], $result['is_moderator']);
         redirect2Home();
     }
 
