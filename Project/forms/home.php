@@ -1,9 +1,14 @@
 <?php
-    require_once('../libs/Smarty.class.php');
     require_once('../utils/help.php');
+    require_once('../utils/db.php');
 
-    $smarty=new Smarty;
-    $smarty->display('base.tpl');
-    $smarty->assign('$action','login_form.php');
-    echo("Not implemented yet");
-?>    
+    $vars = getMessagesForArray(array('avatar'));
+    if(isLoggedId()) {
+        $file = getFile(getAvatarFileName());
+        if($file != NULL) { 
+            $vars += array('mime_type' => $file->file['type'], 'content' => base64_encode($file->getBytes()));
+        }
+    }
+
+    genericSmartyDisplay($vars, '../forms/home.tpl');
+?>

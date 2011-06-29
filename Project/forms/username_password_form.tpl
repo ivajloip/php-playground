@@ -1,10 +1,18 @@
 {extends file="default_form.tpl"}
 {block name=form}
+
             <span class="{$block}">
-                <label class="label" for="username">{$login_msg}:</label>
-                <input class="input" type="text" name="username" id="username" />
-		<br>
+                {if $username_show ne 'false'}
+                    <label class="label" for="username">{$login_msg}:</label>
+                    <input class="input" type="text" 
+                    name="username" id="username" value="{$username_value}"/>
+		    <br/>
+                {else}
+                    <input class="{$input_class}" type="hidden" 
+                        name="username" id="username" value="{$username_value}"/>
+                {/if}
             </span>
+
             <span class="{$block}">
                 <label class="label" for"password">{$password_msg}:</label>
                 <input class="input" type="password" name="password" id="password">
