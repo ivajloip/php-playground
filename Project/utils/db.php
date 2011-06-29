@@ -59,8 +59,26 @@
         return findAll($db->articles);
     }
 
-    function findById($id, $collection) {
-        return $collection->findOne(array('_id' => new MongoId($id)));
+    function findAllActive($collection) {
+        return $collection->find(array('active' => true));
+    }
+
+    function findAllActiveArticles() {
+        $db = getConnection();
+        return findAllActive($db->articles);
+    }
+
+    function findById($id, $collection, $checkActive = true) {
+        $query = array('_id' => new MongoId($id));
+        if($checkActive) {
+            $query['active'] = true;
+        }
+        return $collection->findOne($query);
+    }
+
+    function findUserById($id) {
+        $db = getConnection();
+        return findById($id, $db->users, false);
     }
 
     function findArticleById($id) {
@@ -146,6 +164,15 @@
         $db = getConnection();
         $grid = $db->getGridFS();
         return $grid->findOne(array('_id' => $fileName));
+    }
+
+    // magic lives here 
+    function updateDisplayName($display_name, $id) {
+        $display_name = htmlspecialchars($display_name);
+        $db = getConnection();
+        $db->execute("db.articles.find({'comments.publisher_id' : ObjectId(\"" . $id . "\")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId(\"" . $id . "\").toString() && ( z.publisher_name = '$display_name' ); }); db.articles.save(x); });"); 
+        $articles = $db->articles;
+        $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => true, 'safe' => true));
     }
 
 ?>

@@ -64,6 +64,16 @@
     function isFormSubmitted() {
         return isset($_POST['submit']);
     }
+
+    function isAdmin() {
+        session_start();
+        return $_SESSION['admin'];
+    }
+
+    function isModerator() {
+        session_start();
+        return $_SESSION['moderator'];
+    }
     
     function redirect2Home() {
         redirect2('home.php');   
@@ -78,10 +88,12 @@
         redirect2('login_form.php');
     }
 
-    function Login($id, $display_name) {
+    function login($id, $display_name, $admin = false, $moderator = false) {
         session_start();
         $_SESSION['id'] = $id;
         $_SESSION['display_name'] = $display_name; 
+        $_SESSION['admin'] = $admin;
+        $_SESSION['moderator'] = $moderator; 
     }
 
     function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, 
@@ -173,4 +185,41 @@
         session_start();
         return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $_SESSION['id'] . '_avatar';
     }
+
+    function sendNewPasswdMail($email, $new_password) {
+        require_once("Mail.php");
+ 
+        $from = "Support <project.31222.80307@gmail.com>";
+        $to = $email;
+        $subject = "New Password";
+        $body = "Your new password is " . $new_password;
+     
+        $host = "ssl://smtp.gmail.com";
+        $port = "465";
+        $username = "project.31222.80307";
+        $password = "222307password";
+        
+        $headers = array ('From' => $from, 'To' => $to, 'Subject' => $subject);
+        $smtp =& Mail::factory('smtp', 
+                              array ('host' => $host,
+                                     'port' => $port,
+                                     'auth' => true,
+                                     'username' => $username,
+                                     'password' => $password
+                              )
+        );
+        $mail = $smtp->send($to, $headers, $body);
+        if (PEAR::isError($mail)) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    // replaces our own tag -> @@pic url={some_url}@@ with 
+    // <img src="some_url" alt="picture" />
+    function addImageTags($text) {
+        return preg_replace('/@@pic url\=\{(.+?)\}@@/', '<img src="$1" alt="picture" style="display:block" />', $text);
+    }
+
 ?>

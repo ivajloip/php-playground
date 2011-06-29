@@ -12,10 +12,13 @@
         </div>
 
         <div>
+            {$author_msg} {$article.publisher_name} 
+            {$published_date_mgs} {$article.published_date}
             {$liked_msg}: {$article.liked_count} {$disliked_msg}: {$article.disliked_count}
         </div>
 
         <div id="like_dislike_buttons">
+
             <form id="like_form" action="like.php" method="post">
                 <input type="hidden" value="{$article._id}" name="articleId"/>
                 <input type="hidden" value="article" name="type"/>
@@ -35,7 +38,7 @@
             </form>
         </div>
 
-
+<!-- comments -->
         <table class="{$table_class}">
             <tr class="{$tr_header_class}">
                 <th class="{$th_class}">
@@ -47,7 +50,9 @@
             <tr class="{$tr_class}">
                 <td class="{$td_class}">
                     <div class="{$comment_content}">
-                        {$comment.comment}
+                        <pre>
+                            {$comment.comment}
+                        </pre>
                     </div>
                     <div class="{$comment_info}">
                         {$author_msg} {$comment.publisher_name} 
@@ -67,5 +72,7 @@
             {/strip}
             {/foreach}
         </table>
+<!-- end of comments -->
+
     {/block}
 

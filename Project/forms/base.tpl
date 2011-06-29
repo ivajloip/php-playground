@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>{$title_msg}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         {block name=head}{/block}
     </head>
     <body>
+        <p id="error">{$error_msg}</p>
         {block name=body}{/block}
     </body>
 </html>
