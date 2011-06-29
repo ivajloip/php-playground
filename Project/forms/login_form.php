@@ -1,6 +1,5 @@
 <?php
     require_once('../utils/help.php');
-
     function generateLoginForm() {
         $messages = getMessages();
         $vars = getMessagesForArray(
