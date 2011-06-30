@@ -128,7 +128,7 @@
             return FALSE;
         }
 
-        if(sendNewPasswdMail($user['email'], $user['passwd'])) {
+        if(!sendNewPasswdMail($user['email'], $user['passwd'])) {
             return FALSE;
         }
         return TRUE;

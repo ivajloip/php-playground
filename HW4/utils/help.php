@@ -29,19 +29,18 @@
     function sendNewPasswdMail($email, $new_password) {
         require_once("Mail.php");
  
-        $from = "Admin <server_mail_util@abg.bg>";
-//        echo $email;
+        $from = "Support <project.31222.80307@gmail.com>";
         $to = $email;
         $subject = "New Password";
         $body = "Your new password is " . $new_password;
      
-        $host = "ssl://smtp.abv.bg";
+        $host = "ssl://smtp.gmail.com";
         $port = "465";
-        $username = "server_mail_util";
-        $password = "admin1234";
+        $username = "project.31222.80307";
+        $password = "222307password";
         
         $headers = array ('From' => $from, 'To' => $to, 'Subject' => $subject);
-        $smtp = Mail::factory('smtp', 
+        $smtp =& Mail::factory('smtp', 
                               array ('host' => $host,
                                      'port' => $port,
                                      'auth' => true,
@@ -49,9 +48,7 @@
                                      'password' => $password
                               )
         );
-          
         $mail = $smtp->send($to, $headers, $body);
-           
         if (PEAR::isError($mail)) {
             return FALSE;
         } else {
