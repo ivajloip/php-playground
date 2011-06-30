@@ -19,7 +19,9 @@
         }
 
         public function register() {
-            $this->open('forms/register_form.php');
+            $this->open('forms/home.php');
+            $this->click('register');
+            $this->waitForElementVisible('username');
             $this->type('username', $this->user['username']);
             $this->type('password', $this->user['password']);
             $this->type('confirm_password', $this->user['password']);
@@ -32,7 +34,8 @@
         }
 
         public function login() {
-            $this->open('forms/login_form.php');
+            $this->click('login');
+            $this->waitForElementVisible('dialog');
             $this->type('username', $this->user['username']);
             $this->type('password', $this->user['password']);
             $this->clickAndWait('submit');
