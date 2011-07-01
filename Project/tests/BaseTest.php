@@ -8,7 +8,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class BaseTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
-    const timeout = 10000;
+    const timeout = 100000;
 
     public function setUp()
     {
@@ -86,6 +86,20 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->waitForElementPresent($id);
         $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
                         . $id . "').value.indexOf('" . $value . "') != -1";
+        $this->waitForCondition($condition);
+    }
+
+    public function waitForElementVisible($id) {
+        $this->waitForElementPresent($id);
+        $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
+                        . $id . "').style.display != 'none'";
+        $this->waitForCondition($condition);
+    }
+
+    public function waitForElementNotVisible($id) {
+        $this->waitForElementPresent($id);
+        $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
+                        . $id . "').style.display == 'none'";
         $this->waitForCondition($condition);
     }
 

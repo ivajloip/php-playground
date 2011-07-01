@@ -3,14 +3,14 @@
             <span class="modal_template">
                 <label class="label" for"confirm_password">{$confirm_password_msg}:</label>
                 <input class="input" type="password" name="confirm_password" id="confirm_password">
-		<br/>
+        		<br/>
             </span>
             
-	    <span class="{$block}">
+	        <span class="{$block}">
                 <label class="{$label_class}" for"email">{$email_msg}:</label>
                 <input class="{$input_class}" type="text" name="email" 
                     id="email" value="{$email_value}" />
-		<br/>
+        		<br/>
             </span>
 
             {block name=user_info}{/block}

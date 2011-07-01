@@ -18,8 +18,8 @@
 		<ul class="login_home" id="login_home">
 			<li><a href="#" name="home">Login</a><a><img src="../gif/widjets-arrow.gif"/></a>
 				<ul id="sub">
-					<li class="login_sub"><a href="#dialog" name="modal_login">Login</a></li>
-					<li class="login_sub"><a href="#dialog" name="modal_register">Register</a></li>
+					<li class="login_sub"><a id="login" href="#dialog" name="modal_login">Login</a></li>
+					<li class="login_sub"><a id="register" href="#dialog" name="modal_register">Register</a></li>
 				</ul>
 			</li>
 		</ul>
