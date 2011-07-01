@@ -1,5 +1,10 @@
 {extends file="base.tpl"}
     {block name=body}
+	<div id="content">
+	      <form id="mainform" action="{$action}" method="post" class="{$mainform_class}" enctype="multipart/form-data">
+		   {block name=form}{/block}
+	      </form>
+	</div>
 	<div id="modal_window">
 		<div id="dialog" class="window">
 		       <form id="forgPass_form" action="{$action}" method="post" class="modal_form">
@@ -10,8 +15,8 @@
 				  <input class="button" type="submit" name="submit" value="{$submit_msg}" id="submit" />
       			    </span>
         	      </form>
-  		      <form id="modal_form" action="{$action}" method="post" class="modal_form" enctype="multipart/form-data">
- 		           {block name=form}{/block}
+  		      <form id="modal_form" action="{$action}" method="post" class="modal_form">
+ 		           {block name=modalform}{/block}
         	      </form>
 		      <a href="#" class="close">Close</a>
 		      <div id="description">Something</div>

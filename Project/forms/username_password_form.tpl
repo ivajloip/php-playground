@@ -1,5 +1,5 @@
 {extends file="default_form.tpl"}
-{block name=form}
+{block name=modalform}
 
             <span class="{$block}">
                 {if $username_show ne 'false'}

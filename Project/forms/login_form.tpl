@@ -1,5 +1,5 @@
 {extends file="default_form.tpl"}
-{block name=form}
+{block name=modalform}
     <span class="login_form">
       <label class="label_class" for="username">{$login_msg}:</label>
       <input class="input_class" type="text" name="login_username" id="username" />
