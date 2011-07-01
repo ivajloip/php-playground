@@ -175,4 +175,27 @@
         $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => true, 'safe' => true));
     }
 
+    function findAllProvinces() {
+        $db = getConnection();
+        return findAll($db->provinces);
+    }
+
+    function findProvinceById($id) {
+        $db = getConnection();
+        return findById($id, $db->provinces, false);
+    }
+
+    function findAllCategories() {
+        $db = getConnection();
+        return findAll($db->categories);
+    }
+
+    function findCategoriesByIds($ids) {
+        $db = getConnection();
+        $search = array();
+        foreach($ids as $id) {
+            $search[] = new MongoId($id);
+        }
+        return $db->categories->find(array('_id' => array('$in' => $search)));
+    }
 ?>

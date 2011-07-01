@@ -8,7 +8,9 @@
     }
 
     $article['published_date'] = date('h:i:s M d, Y', $article['published_date']->sec);
-    $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', 'submit', 'title', 'author', 'published_date'));
+    $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', 
+                                      'submit', 'title', 'published_date',
+                                      'author', 'article_province'));
     $comments = $article['comments'];
     foreach($comments as &$comment) {
         $comment['published_date'] = date('h:i:s M d, Y', $comment['published_date']->sec);

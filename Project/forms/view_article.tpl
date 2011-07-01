@@ -12,6 +12,7 @@
         </div>
 
         <div>
+            {$article_province_msg}: {$article.province}
             {$author_msg} {$article.publisher_name} 
             {$published_date_mgs} {$article.published_date}
             {$liked_msg}: {$article.liked_count} {$disliked_msg}: {$article.disliked_count}
