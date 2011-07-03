@@ -50,6 +50,16 @@
         return true;
     }
 
+    function update($collection, $query, $array, $safe = true, $multiple = true) {
+        try {
+            $collection->update($query, $array, array('multiple' => $multiple, 'safe' => $safe));
+        }
+        catch(MongoCursorException $e) {
+            return false;
+        }
+        return true;
+    }
+
     function findAll($collection) {
         return $collection->find();
     }
@@ -69,7 +79,11 @@
     }
 
     function findById($id, $collection, $checkActive = true) {
-        $query = array('_id' => new MongoId($id));
+        return findByUniqueField('_id', new MongoId($id), $collection, $checkActive);
+    }
+
+    function findByUniqueField($fieldName, $fieldValue, $collection, $checkActive = true) {
+        $query = array($fieldName => $fieldValue);
         if($checkActive) {
             $query['active'] = true;
         }
@@ -81,9 +95,22 @@
         return findById($id, $db->users, false);
     }
 
-    function findArticleById($id) {
+    function findUserByUniqueField($fieldName, $fieldValue, $checkActive = true) {
         $db = getConnection();
-        return findById($id, $db->articles);
+        return findByUniqueField($fieldName, $fieldValue, $db->users, $checkActive);
+    }
+
+    function findUserByEmail($email, $checkActive = true) {
+        return findUserByUniqueField('email', $email, $checkActive);
+    }
+
+    function findUserByUsername($username, $checkActive = true) {
+        return findUserByUniqueField('username', $username, $checkActive);
+    }
+
+    function findArticleById($id, $checkActive = true) {
+        $db = getConnection();
+        return findById($id, $db->articles, $checkActive);
     }
 
     function likeArticle($articleId, $userId) {
@@ -110,6 +137,24 @@
 
     function dislikeComment($articleId, $commentId, $userId) {
         voteForComment($articleId, $commentId, $userId, 'disliked', 'liked');
+    }
+
+    function followArticle($articleId, $followerId) {
+        $db = getConnection();
+        $articles = $db->articles;
+        follow($articleId, $followerId, $articles);
+    }
+
+    function followUser($userId, $followerId) {
+        $db = getConnection();
+        $users = $db->users;
+        follow($userId, $followerId, $users);
+    }
+
+    function follow($itemId, $followerId, $collection) {
+        $user = findUserById($followerId);
+        $collection->update(array('_id' => new MongoId($itemId)), 
+                            array('$addToSet' => array('followers' => $user['email'])));
     }
 
     function vote(&$item, $forKey, $otherKey, $userId) {
@@ -173,6 +218,21 @@
         $db->execute("db.articles.find({'comments.publisher_id' : ObjectId(\"" . $id . "\")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId(\"" . $id . "\").toString() && ( z.publisher_name = '$display_name' ); }); db.articles.save(x); });"); 
         $articles = $db->articles;
         $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => true, 'safe' => true));
+    }
+
+    function updateEmail($oldEmail, $newEmail) {
+        if($oldEmail == $newEmail) return;
+
+        $db = getConnection();
+        $query = array('followers' => $oldEmail);
+        updateCollectionFollowers($query, $newEmail, $db->articles);
+        updateCollectionFollowers($query, $newEmail, $db->users);
+    }
+
+    function updateCollectionFollowers($findQuery, $newEmail, $collection) {
+        $collection->update($findQuery, array('$addToSet' => 
+                                            array('followers' => $newEmail)));
+        $collection->update($findQuery, array('$pull' => $findQuery));
     }
 
     function findAllProvinces() {

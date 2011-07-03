@@ -5,6 +5,7 @@
         if(isEmpty($_POST['comment'])) {
             return NULL;
         }
+        var_dump($_POST['comment']);
         return array('comment' =>  addImageTags(htmlspecialchars($_POST['comment'], ENT_QUOTES)), 
                      'publisher_id' => $_SESSION['id'],
                      'publisher_name' => $_SESSION['display_name']
@@ -21,14 +22,15 @@
     function submitComment() {
         require_once('../utils/db.php');
         $messages = getMessages();
-        $article_id = $_GET['id'];
-        $article = findArticleById($article_id);
+        $articleId = $_GET['id'];
+        $article = findArticleById($articleId);
         $comments = $article['comments'];
         $comment = parseCommentFromPost();
         if($comment == NULL) {
-            echo($messages['error_registering_user']);
+            die($messages['error_general']);
             return false;
         }
+        // TODO: optimize me to add just the comment to the end with update, not to save the whole article again
         $comments[] = $comment;
         $article['comments'] = $comments;
         $db = getConnection();
@@ -37,6 +39,8 @@
             echo($message['error_general']);
             return false;
         }
+        $user = findUserById($_SESSION['id']);
+        notifyFollowers(array_unique($user['followers'] + $article['followers']) , $_SESSION['display_name'], $articleId);
         return true;
     }
 

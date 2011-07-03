@@ -10,6 +10,10 @@
         redirect2Login();
         return;
     }
+    else if(isEmpty($articleId)) {
+        $messages = getMessages();
+        die($messages['error_item_not_found']);
+    }
     else if(isset($_POST['like'])) {
         if($type == 'article') {
             likeArticle($articleId, $userId);    
@@ -27,6 +31,9 @@
             $commentId = $_POST['commentId'];
             dislikeComment($articleId, $commentId, $userId);
         }
+    }
+    else if(isset($_POST['follow'])) {
+        followArticle($articleId, $userId);
     }
     redirect2('../forms/view_article.php?id=' . $articleId);
 ?>

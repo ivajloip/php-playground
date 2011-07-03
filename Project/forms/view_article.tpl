@@ -19,15 +19,14 @@
         </div>
 
         <div id="like_dislike_buttons">
-
             <form id="like_form" action="like.php" method="post">
                 <input type="hidden" value="{$article._id}" name="articleId"/>
                 <input type="hidden" value="article" name="type"/>
-                <input type="submit" value="{$liked_msg}" name="like">
-                <input type="submit" value="{$disliked_msg}" name="dislike">
+                <input type="submit" value="{$liked_msg}" name="like" />
+                <input type="submit" value="{$disliked_msg}" name="dislike" />
+                <input type="submit" value="{$follow_msg}" name="follow" />
             </form>
         </div>
-
 
         <div>
             <form id="{$form_id}" action="{$action}" method="post" class="{$form_class}">
@@ -64,8 +63,8 @@
                             <input type="hidden" value="{$comment._id}" name="commentId"/>
                             <input type="hidden" value="{$article._id}" name="articleId"/>
                             <input type="hidden" value="comment" name="type"/>
-                            <input type="submit" value="{$liked_msg}" name="like">
-                            <input type="submit" value="{$disliked_msg}" name="dislike">
+                            <input type="submit" value="{$liked_msg}" name="like" />
+                            <input type="submit" value="{$disliked_msg}" name="dislike" />
                         </form>
                     </div>
                 </td>

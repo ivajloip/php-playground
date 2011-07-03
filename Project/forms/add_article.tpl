@@ -1,14 +1,15 @@
 {extends file="default_form.tpl"}
         {block name=form}
+            <input type="hidden" id="id" name="id" value="{$id}" />
             <span class="{$block}">
                 <label class="{$article_title_label_class}" for="article_title">{$article_title_msg}:</label>
-                <input class="{$article_title_class}" id="article_title" name="article_title" type="text"/>
+                <input class="{$article_title_class}" id="article_title" name="article_title" type="text" value="{$article_title}"/>
                 <br/>
             </span>
 
             <span class="{$block}">
                 <label class="{$article_label_class}" for="article">{$article_label_msg}:</label>
-                <textarea class="{$article_text_class}" id="article" name="article" cols="50" rows="6" ></textarea>
+                <textarea class="{$article_text_class}" id="article" name="article" cols="50" rows="6">{$article}</textarea>
                 <br/>
             </span>
 
@@ -19,7 +20,7 @@
                     <option value="">{$empty_value_msg}</option>
                 {foreach from=$provinces item=province}
                 {strip}
-                    <option value="{$province._id}">{$province.name}</option>
+                    <option value="{$province._id}" {$province.selected}>{$province.name}</option>
                 {/strip}
                 {/foreach}
                 </select>

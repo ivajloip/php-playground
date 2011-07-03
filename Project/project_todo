@@ -1,0 +1,93 @@
+[Да имплементирам] : 
+#Да създам начин да не се виждат неща -> публикации, коментари, потребители да не са използваеми...
+#Да създам начин за промяна на неща от профила.
+#да създам възможност за гледане на публикации.
+#Да създам възможност за коментиране на публикации.
+#Да създам възможност за харесване/нехаресване на публикации.
+Да създам възможност за преглед на всички потребители (ако имаш съответните права), промяна на част от данните им.
+#За промяна на публикации от модератори.
+#Да не се затриват нещата за публикацията като я променя модератор - да има update, не save/insert ;)
+#Да могат да се слагат снимки в статиите и коментарите
+~Възстановяване на забравена парола
+~Автоматични тестове
+#Категории на статий - област и вид на занимание ( да са примерно като checkbox и да могат да се селектират повече от 1 )
+Добавяне на вид на занимание
+Търсене по различни критерии - област, вид занимание, ключови думи - възможности за подреждане по различни неща
+~Следене на потребител и статия - да праща email-и (примерно да можеш да търсиш човек по username/email и да може да се добави за следене - да ти праща емейл като 	публикува нещо)
+
+Да се направи да може да се добавя потребител за следене - формичка за търсене на потребители по username или email с бутонче, което като се натисне да се добавя 	настоящия потребител $_SESSION['id'], да следи намерения потребител (ако има такъв). Да кажем, че $user е намерения потребител. Тогава това може да стане с 	followUser($user['_id'], $_SESSION['id']); Потребител може да се намери с findUserByEmail($email); или findUserByUsername($username);
+
+[Полезни] :
+-- 
+new function($) {
+$.fn.getCursorPosition = function() {
+    var pos = 0;
+    var el = $(this).get(0);
+    // IE Support
+    if (document.selection) {
+        el.focus();
+        var Sel = document.selection.createRange();
+        var SelLength = document.selection.createRange().text.length;
+        Sel.moveStart('character', -el.value.length);
+        pos = Sel.text.length - SelLength;
+    }
+    // Firefox support
+    else if (el.selectionStart || el.selectionStart == '0')
+        pos = el.selectionStart;
+
+    return pos;
+}
+} (jQuery);
+
+$("#myTextBoxSelector").getCursorPosition();
+--
+
+-- Добавяне на области в България
+
+db.provinces.insert({'name' : 'Благоевградска'}); 
+db.provinces.insert({'name' : 'Бургаска'}); 
+db.provinces.insert({'name' : 'Варненска'}); 
+db.provinces.insert({'name' : 'Великотърновска'}); 
+db.provinces.insert({'name' : 'Видинска'}); 
+db.provinces.insert({'name' : 'Врачанска'}); 
+db.provinces.insert({'name' : 'Габровска'}); 
+db.provinces.insert({'name' : 'Добричка'}); 
+db.provinces.insert({'name' : 'Кърджалийска'}); 
+db.provinces.insert({'name' : 'Кюстендилска'}); 
+db.provinces.insert({'name' : 'Ловешка'}); 
+db.provinces.insert({'name' : 'Монтанска'}); 
+db.provinces.insert({'name' : 'Пазарджишка'}); 
+db.provinces.insert({'name' : 'Пернишка'}); 
+db.provinces.insert({'name' : 'Плевенска'}); 
+db.provinces.insert({'name' : 'Пловдивска'}); 
+db.provinces.insert({'name' : 'Разградска'}); 
+db.provinces.insert({'name' : 'Русенска'}); 
+db.provinces.insert({'name' : 'Силистренска'}); 
+db.provinces.insert({'name' : 'Сливенска'}); 
+db.provinces.insert({'name' : 'Смолянска'}); 
+db.provinces.insert({'name' : 'София-град'}); 
+db.provinces.insert({'name' : 'Софийска'}); 
+db.provinces.insert({'name' : 'Старозагорска'}); 
+db.provinces.insert({'name' : 'Търговищка'}); 
+db.provinces.insert({'name' : 'Хасковска'}); 
+db.provinces.insert({'name' : 'Шуменска'}); 
+db.provinces.insert({'name' : 'Ямболска'});
+
+-- край
+
+-- Добавяне на категории
+db.categories.ensureIndex({name: 1}, {unique: true});
+db.categories.insert({'name' :'Катерене'});
+db.categories.insert({'name' : 'Колоездене'});
+db.categories.insert({'name' : 'Риболов'});
+db.categories.insert({'name' : 'Поход'});
+-- край
+
+
+--
+<img align="left" src="" alt=""></img>
+--
+
+
+-- masterpiece
+db.articles.find({'comments.publisher_id' : ObjectId("4dfa76b2fcddd35b11000002")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId("4dfa76b2fcddd35b11000002").toString() && ( z.publisher_name = 'new' ); }); db.articles.save(x); }); 

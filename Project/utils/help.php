@@ -186,13 +186,20 @@
         return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $_SESSION['id'] . '_avatar';
     }
 
-    function sendNewPasswdMail($email, $new_password) {
+    function notifyFollowers($followers, $who, $articleId) {
+        $messages = getMessages();
+        $subject = $messages['new_activity_notification'];
+        $body = $who . $messages['new_activity_message'] . generateArticleViewLink($articleId);
+        foreach($followers as $follower) {
+            sendMail($follower, $subject, $body);
+        }
+    }
+
+    function sendMail($email, $subject, $body) {
         require_once("Mail.php");
  
         $from = "Support <project.31222.80307@gmail.com>";
         $to = $email;
-        $subject = "New Password";
-        $body = "Your new password is " . $new_password;
      
         $host = "ssl://smtp.gmail.com";
         $port = "465";
@@ -216,10 +223,19 @@
         }
     }
 
+    function sendNewPasswdMail($email, $new_password) {
+        $messages = getMessages();
+        return sendMail($email, $messages['new_password_subject'], $messages['new_password_body'] . $new_password);
+   }
+
     // replaces our own tag -> @@pic url={some_url}@@ with 
     // <img src="some_url" alt="picture" />
     function addImageTags($text) {
         return preg_replace('/@@pic url\=\{(.+?)\}@@/', '<img src="$1" alt="picture" style="display:block" />', $text);
+    }
+
+    function generateArticleViewLink($articleId) {
+        return 'http://' . $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/view_article.php?id=' . $articleId; 
     }
 
 ?>

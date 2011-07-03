@@ -93,7 +93,11 @@
             $update['avatar'] = true;
         }
         $id = getId();
+        $user = findUserById($id);
+        $oldEmail = $user['email'];
+        $newEmail = $update['email'];
         $users->update(array('_id' => $id), array('$set' => $update));
+        updateEmail($oldEmail, $newEmail);
         if($_SESSION['display_name'] != $update['display_name']) {
             updateDisplayName($update['display_name'], $id);
         }
