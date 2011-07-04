@@ -139,18 +139,24 @@
         voteForComment($articleId, $commentId, $userId, 'disliked', 'liked');
     }
 
+    // article with articleId becomes followed by user with followerId
     function followArticle($articleId, $followerId) {
         $db = getConnection();
         $articles = $db->articles;
         follow($articleId, $followerId, $articles);
     }
 
+    // user with userId becomes followed by user with followerId
     function followUser($userId, $followerId) {
         $db = getConnection();
         $users = $db->users;
         follow($userId, $followerId, $users);
     }
 
+    // item with itemId becomes followed by user with followerId
+    // param itemId : An id as string or MongoId that specifies the item to be followed
+    // param followerId : The id as string or MongoId of the user who wants to follow the item
+    // param collection : the collection where item lives - currently articles or users
     function follow($itemId, $followerId, $collection) {
         $user = findUserById($followerId);
         $collection->update(array('_id' => new MongoId($itemId)), 
@@ -215,6 +221,10 @@
     function updateDisplayName($display_name, $id) {
         $display_name = htmlspecialchars($display_name);
         $db = getConnection();
+
+        // that was the only way that I managed to do this - find all articles 
+        // which has comments from the one we search for, for every comment,
+        // if the author is appropriate, change it and save the article
         $db->execute("db.articles.find({'comments.publisher_id' : ObjectId(\"" . $id . "\")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId(\"" . $id . "\").toString() && ( z.publisher_name = '$display_name' ); }); db.articles.save(x); });"); 
         $articles = $db->articles;
         $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => true, 'safe' => true));
