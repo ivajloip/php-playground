@@ -13,13 +13,14 @@
         public function testRegister() {
             $this->register();
             $this->logout();
-            $this->login();
+            $this->login($this->user['username'], $this->user['password']);
             $this->logout();
             $this->checkRegister();
         }
 
         public function register() {
             $this->open('forms/home.php');
+            $this->click('login_sub_menu');
             $this->click('register');
             $this->waitForElementVisible('username');
             $this->type('username', $this->user['username']);
@@ -30,15 +31,11 @@
         }
 
         public function logout() {
-            $this->open('forms/logout_form.php');
+            $this->click('login_sub_menu');
+            $this->clickAndWait('login');
         }
 
         public function login() {
-            $this->click('login');
-            $this->waitForElementVisible('dialog');
-            $this->type('username', $this->user['username']);
-            $this->type('password', $this->user['password']);
-            $this->clickAndWait('submit');
         }
 
         public function checkRegister() {

@@ -8,18 +8,27 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class BaseTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
-    const timeout = 100000;
+    const timeout = 10000;
 
     public function setUp()
     {
         $this->selenium = new Testing_Selenium("*firefox", "http://localhost/Project");
-        $this->selenium->setTimeout(2000);
+//        $this->selenium->setTimeout(2000);
         $this->selenium->start();
     }
 
     public function tearDown()
     {
         $this->selenium->stop();
+    }
+
+    public function login($username, $password) {
+        $this->click('login_sub_menu');
+        $this->click('login');
+        $this->waitForElementVisible('username');
+        $this->type('username', $username);
+        $this->type('password', $password);
+        $this->clickAndWait('submit');
     }
 
     public function waitForElementPresent($id) {
@@ -61,6 +70,14 @@ class BaseTest extends PHPUnit_Framework_TestCase
         return $this->selenium->isTextPresent($text);
     }
 
+    public function getValue($id) {
+        return $this->selenium->getValue($id);
+    }
+
+    public function getText($id) {
+        return $this->selenium->getText($id);
+    }
+
     public function waitForEnabledElement($id) {
         $this->waitForElementPresent($id);
         $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
@@ -92,6 +109,7 @@ class BaseTest extends PHPUnit_Framework_TestCase
     public function waitForElementVisible($id) {
         $this->waitForElementPresent($id);
         $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
+                        . $id . "') && " . "selenium.browserbot.getCurrentWindow().document.getElementById('" 
                         . $id . "').style.display != 'none'";
         $this->waitForCondition($condition);
     }

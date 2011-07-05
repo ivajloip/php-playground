@@ -65,14 +65,10 @@
 }
 
 form.modal_form{
-	position:absolute;
+	width:100%;
 }
 
-span.modal_template{	
-	margin_left:3px;
-}
 
 a.forgPass_link{	
-	margin-top:50%;
 	float:right;
 }

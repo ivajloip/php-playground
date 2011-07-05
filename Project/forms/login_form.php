@@ -29,4 +29,5 @@
     }
 
     genericRequestHandler(submitLogin, redirect2Home, generateLoginForm);
+
 ?>

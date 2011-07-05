@@ -5,59 +5,95 @@ body{
 }
 
 #home{
-	border-style:solid;
-	border-width:1px;
-	dislay:table;
+	border-left-style:solid;
+	border-right-style:solid;
+	border-bottom-style:solid;
+	border-left-width:1px;
+	border-right-width:1px;
+	border-bottom-width:1px;
+	display:table;
+	width:100%;
 }
 
-ul.login_home {
+#upper_rope {
 	margin: 0;
-	position:absolute;
-	top:0;
-	left:85%;
-	width:6%;
-	margin:0;
-}
-ul.login_home li{
-	display:block;
-	border-style:solid;
-	border-width:1px;
-	border-color:green;
 	padding:0;
-	width:90%;
+	width:100%;
+	background-color:black;
+	height:25px;
+}
+
+#login_home{
+	display:block;
+	float:right;
+	background-color:#82d23d;
+	height:24px;
+	width:10%;
+	text-align:center;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	margin:0;
 	
 }
 
-ul.login_home li a{
+#login_home a{
 	text-decoration:none;
-	color:green;
+	color:black;
+	
 }
 
+
+#sub_login_div{
+	height:41px;
+	width:200px;
+	margin:0;
+	padding:0;
+	position:relative;
+	float:right;
+	background-color:#82d23d;
+	display:none;
+	border-left-style:solid;
+	border-bottom-style:solid;
+	border-left-width:1px;
+	border-bottom-width:1px;
+}
+
+
 li.login_sub{
-	border-top-style:solid;
-	border-top-width:1px;
-	border-color:green;
+	
 	background:rgba(130,210,61,0.5);
+	text-align:left;
+	text-decoration:none;
+	
+}
+
+li.login_sub a{
+	
+	text-decoration:none;
 }
 
 li.login_sub:hover{
-	background-color:#82d23d;
+	text-decoration:underline;
 }
 
 #sub{
-	display:none;
-	position:absolute;
-	padding:0;
 	margin:0;
-	width:75%;
+	position:relative;
+	padding:0;
+	display:inherit;
+	list-style:none;
 }
 
 #header{
 	margin-top:0;
 	width:100%;
-	height:20%;
-	border-style:solid;
-	border-width:1px;
+	height:100px;
+	border-left-style:solid;
+	border-right-style:solid;
+	border-top-style:solid;
+	border-left-width:1px;
+	border-right-width:1px;
+	border-top-width:1px;
 	border-color:#000;
 	display:table;
 	background-color:gray;
@@ -65,11 +101,12 @@ li.login_sub:hover{
 	
 #header ul.main_menu {
 	margin-top: 5%;
+	margin-bottom:0;
 }
 #header ul.main_menu li{
 	float:left;
 	display:block;
-	width:12%;
+	width:13%;
 	height:100%;;
 	text-align:center;
 	font-size:100%;
@@ -93,6 +130,7 @@ li.login_sub:hover{
 #header ul.main_menu li:hover{	
 	background-color:white;
 	border-bottom-color:white;
+	
 }
 
 input.search{
@@ -100,8 +138,9 @@ input.search{
 	border-style:solid;
 	border-width:1px;
 	border-radius:9%;
+	border-color:green;
 	-moz-border-radius:9%;
-	width:8%;
+	width:10%;
 	float:right;
 	margin-top:5%;
 	margin-right:2%;
