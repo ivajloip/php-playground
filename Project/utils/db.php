@@ -90,6 +90,11 @@
         return $collection->findOne($query);
     }
 
+    function findAllUsers() {
+        $db = getConnection();
+        return findAll($db->users);
+    }
+
     function findUserById($id) {
         $db = getConnection();
         return findById($id, $db->users, false);

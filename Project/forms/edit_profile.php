@@ -29,7 +29,8 @@
                        'is_admin_checked' => $user['is_admin'] ? 'checked' : '', 
                        'is_moderator_checked' => 
                             $user['is_moderator'] ? 'checked' : '',
-                       'is_active_checked' => $user['active'] ? 'checked' : '');
+                       'is_active_checked' => $user['active'] ? 'checked' : '',
+			'user_logged' => isLoggedId());
         genericSmartyDisplay($vars, "../forms/edit_profile.tpl");
     }
 

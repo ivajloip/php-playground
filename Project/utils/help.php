@@ -129,6 +129,8 @@
         require_once('../libs/Smarty.class.php');
         $smarty = new Smarty;
         $vars += getMessagesForArray(array('title'));
+	    $vars += array('user_logged' => isLoggedId(),
+                        'admin' => isAdmin());
         smartyAssign($smarty, $vars);
         $smarty->display($page);
         return $smarty;
@@ -187,11 +189,13 @@
     }
 
     function notifyFollowers($followers, $who, $articleId) {
-        $messages = getMessages();
-        $subject = $messages['new_activity_notification'];
-        $body = $who . $messages['new_activity_message'] . generateArticleViewLink($articleId);
-        foreach($followers as $follower) {
-            sendMail($follower, $subject, $body);
+        if(NULL != $followers && count($followers) > 0) {
+	        $messages = getMessages();
+	        $subject = $messages['new_activity_notification'];
+	        $body = $who . $messages['new_activity_message'] . generateArticleViewLink($articleId);
+	        foreach($followers as $follower) {
+	            sendMail($follower, $subject, $body);
+	        }
         }
     }
 
@@ -235,7 +239,11 @@
     }
 
     function generateArticleViewLink($articleId) {
-        return 'http://' . $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/view_article.php?id=' . $articleId; 
+        return 'http://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/view_article.php?id=' . $articleId; 
+    }
+
+    function generateProfileViewLink($userId) {
+        return 'http://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/edit_profile.php?id=' . $userId; 
     }
 
 ?>

@@ -4,7 +4,6 @@
     $rawArticles = findAllActiveArticles();
     $articles = array();
 
-
     foreach($rawArticles as $article) {
         $articles[generateArticleViewLink($article['_id'])] = $article['article_title'];
     }

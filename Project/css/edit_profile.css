@@ -1,0 +1,28 @@
+#content{
+	width:50%;
+	display:block;
+}
+
+span.edit_span{
+	width:100%;
+	display:block;
+	padding:0;
+	margin:0;
+}
+
+input.input{
+	padding-left:10%;
+	display:block;
+	width:20%;
+}
+
+label{
+	float:left;
+	display:block;
+	width:40%;
+	text-align:left;
+}
+
+input.button{
+	text-align:center;
+}
