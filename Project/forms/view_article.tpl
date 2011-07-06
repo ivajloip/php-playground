@@ -27,6 +27,11 @@
                 <input type="submit" value="{$follow_msg}" name="follow" />
             </form>
         </div>
+        {if moderator eq true}
+        <div>
+            <a href="edit_article.php?id={$article._id}">Edit</a>
+        </div>
+        {/if}
 
         <div>
             <form id="{$form_id}" action="{$action}" method="post" class="{$form_class}">

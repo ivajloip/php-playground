@@ -8,7 +8,7 @@
 
     function submitArticle() {
         $messages = getMessages();
-        $db = getConnect();
+        $db = getConnection();
         $articles = $db->articles;
         $article = parseArticleFromPost();
         if($article == NULL) {
@@ -39,5 +39,5 @@
         return true;
     }
 
-    genericRequestHandler(submitArticle, generateArticleForm);
+    genericRequestHandler(submitArticle, generateNewArticleForm);
 ?>
