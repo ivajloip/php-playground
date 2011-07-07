@@ -4,11 +4,16 @@
 
     $vars = getMessagesForArray(array('avatar'));
     if(isLoggedId()) {
-        $file = getFile(getAvatarFileName());
-        if($file != NULL) { 
-            $vars += array('mime_type' => $file->file['type'], 'content' => base64_encode($file->getBytes()));
+        if($_SESSION['avatar'] === TRUE) {
+            $file = getFile(getAvatarFileName($_SESSION['id']));
         }
-	$vars += array('user_logged' => true);
+        else {
+            $file = getFile(getAvatarFileName());
+        }
+        if($file != NULL) { 
+            $vars += array('mime_type' => $file->file['type'], 'content' => chunk_split(base64_encode($file->getBytes())));
+        }
+	    $vars += array('user_logged' => TRUE);
     }
     genericSmartyDisplay($vars, '../forms/home.tpl');
     echo($user_logged);

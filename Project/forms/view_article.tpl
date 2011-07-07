@@ -12,6 +12,11 @@
         </div>
         <br>
         <div id="article_details">
+           <span class="{$block}">
+                <img src="data:{$mime_type};base64,{$content}" 
+                    alt="{$avatar_msg}" align="left" class="avatar"/>
+            </span>
+
             {$article_province_msg}: {$article.province}
             {$author_msg} {$article.publisher_name} 
             {$published_date_mgs} {$article.published_date}

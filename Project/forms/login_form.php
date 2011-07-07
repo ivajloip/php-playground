@@ -24,7 +24,8 @@
             generateLoginForm($messages['error_incorrect_login']);
             return;
         }
-        login($result['_id'], $result['display_name'], $result['is_admin'], $result['is_moderator']);
+        login($result['_id'], $result['display_name'], $result['is_admin'], 
+              $result['is_moderator'], $result['avatar']);
         redirect2Home();
     }
 
