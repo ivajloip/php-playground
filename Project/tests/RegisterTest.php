@@ -5,9 +5,12 @@
 
         private $user;
 
-        function __construct() {
-            $username = 'test' . time();
+        function __construct($selenium = NULL, $username = NULL) {
+            if(NULL == $username) {
+                $username = 'test' . time();
+            }
             $this->user = array('username' => $username, 'password' => 'qwerty123', 'email' => $username . '@mydomain.com');
+            $this->setSelenium($selenium);
         }
 
         public function testRegister() {
@@ -19,7 +22,6 @@
         }
 
         public function register() {
-            $this->open('forms/home.php');
             $this->click('login_sub_menu');
             $this->click('register');
             $this->waitForElementVisible('username');
@@ -28,11 +30,6 @@
             $this->type('confirm_password', $this->user['password']);
             $this->type('email', $this->user['email']);
             $this->clickAndWait('submit');
-        }
-
-        public function logout() {
-            $this->click('login_sub_menu');
-            $this->clickAndWait('login');
         }
 
         public function checkRegister() {
