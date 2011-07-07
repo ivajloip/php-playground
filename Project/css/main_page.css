@@ -13,14 +13,14 @@ body{
 	border-bottom-width:1px;
 	display:table;
 	width:100%;
-    height:800px;
+    height:850px;
     background-color:white;
 }
 
 #most{
     float:right;
     width:30%;
-    margin-top:5%;
+    margin-top:2%;
     margin-right:2px;
 }
 
@@ -53,4 +53,34 @@ body{
 
 #most_searched ul li:hover, #most_popular ul li:hover{
 	background-color:#82d23d;
+}
+
+#footer{
+    width:100%;
+    height:25px;
+    background-color:black;
+    color:white;
+}
+
+#myDiv{
+    width:100%;
+    
+}
+
+#follow{
+    width:100%;
+    float:right;
+}
+
+#follow a{
+    text-decoration:none;
+    color:black;
+}
+
+#follow a:hover{
+    text-decoration:underline;
+}
+
+#follow a:focus{
+    outline:0;
 }

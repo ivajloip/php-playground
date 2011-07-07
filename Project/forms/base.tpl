@@ -66,19 +66,33 @@
 			</ul>
 		</td></tr></table>
 	</div>
-	<div id="home">Home
+	<div id="home">
     <div id="most">
 		<div id="most_popular">
 			<ul>
-				<li><a href="#">Most popular</a></li>
-					<ul><li></li></ul>
+				<li><a href="#">Latest</a></li>
+					<ul>
+                        {foreach from=$latest item=latest_item}
+                            <li>{$latest_item.article_title}</li>
+                        {/foreach}
+                    </ul>
 			</ul>
-	    </div><br></br>
+            <br></br>
+	    </div>
+        <br></br>
+        <br></br>
 	    <div id="most_searched">
 		<ul>
-			<li><a href="#">Most searched</a></li>
-				<ul><li></li></ul>
+			<p><li><a href="#">Most liked</a></li>
+				<ul>
+                    {foreach from=$most_liked item=liked}
+                            <li>{$liked.article_title}</li>
+                    {/foreach}
+                </ul></p>
 		</ul>
+        </div>
+        <div id="follow">
+            <p><a name="follow" href="#">Follow</a></p>
         </div>
      </div>   
        <div id="myDiv" style="background-color:white;"> 
@@ -86,6 +100,9 @@
             <p id="error">{$error_msg}</p>
             {block name=body}{/block}
        </div>
+       </div>
+       <div id="footer">
+            {$footer_msg}
        </div>
     </body>
 </html>

@@ -46,6 +46,7 @@
 //            $this->isChecked('moderator');
 //            $this->isChecked('admin');
             $this->isChecked('is_active');
+            $this->waitForElementWithValue('display_name_top',$this->user['display_name']);
         }
     }
 ?>

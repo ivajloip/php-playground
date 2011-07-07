@@ -23,5 +23,9 @@ $(document).ready(function(){
     $('a[name=findArticle]').click(function(){
 		$("#myDiv").load("find_article.php #myDiv");
 	});
+    
+    $('a[name=follow]').click(function(){
+		$("#myDiv").load("followUser.php #myDiv");
+	});
 	
 });
