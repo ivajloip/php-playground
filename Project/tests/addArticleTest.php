@@ -1,34 +1,32 @@
 <?php
     require_once('../tests/BaseTest.php');
 
-    class AddArticle extends BaseTest{
+    class AddArticle extends BaseTest {
         private $article;
         
-        function __construct(){
-            $this->article=array('article_title' => '<p>Some article title</p>', 'article' => '<div>Some text</div', 'province' => 'Софийска', 'tags' => "Катерене");
+        function __construct($selenium = NULL) {
+            $this->article=array('article_title' => '<p>Some article title</p>', 'article' => '<div>Some text</div>', 'province' => 'Софийска', 'tags' => "Катерене");
+            $this->selenium = $selenium;
         }
     
-        function testAddArticle(){
+        public function testAddArticle() {
             $this->login('ivo','test');
-            addArticle();
-            checkArticle();
+            $this->addArticle();
+            $this->checkArticle();
         }
 
-        function addArticle(){
-            $this->open('forms/home.php');
-            $this->click('addArticle');
+        private function addArticle() {
+            $this->click('add_article_link');
             $this->type('article_title', $this->article['article_title']);
             $this->type('article', $this->article['article']);
-            $this->selectElementWithValue('province', $this->article['province']);
-            $this->selectElementWithValue('tags', $this->article['tags']);
-            $this->click('submit');        
+            $this->selectElementWithLabel('province', $this->article['province']);
+            $this->selectElementWithLabel('categories', $this->article['tags']);
+            $this->clickAndWait('submit');        
         }
     
-        function checkArticle(){    
-            $this->waitForElementWithValue('submitted_article_title', $this->article['article_title']);
-            $this->waitForElementWithValue('article.article', $this->article['article']);
+        private function checkArticle() {
+            $this->waitForElementWithText('article_title', htmlspecialchars($this->article['article_title']));
+            $this->waitForElementWithText('article_body', htmlspecialchars($this->article['article']));
         }
-
-
     }
 ?>

@@ -2,13 +2,13 @@
     {block name=body}
         <div id="submitted_article_title">
             <h1>
-                <span class="{$article_title_class}">
+                <span id="article_title" class="{$article_title_class}">
                     {$article.article_title}
                 </span>
             </h1>
         </div>
         <div id="article">
-            <pre class="{$article_class}">{$article.article}</pre>
+            <pre id="article_body" class="{$article_class}">{$article.article}</pre>
         </div>
         <br>
         <div id="article_details">

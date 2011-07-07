@@ -53,16 +53,16 @@
 				</form>
 			</div>
 			<ul class="main_menu" style="height:25px;">
-			      <li name="home"><a href="#" name="home">Home</a></li>
-			      <li name="list_articles"><a href="#" name="viewArticle">View articles</a></li>
+			      <li name="home"><a href="#" id="home_link" name="home">Home</a></li>
+			      <li name="list_articles"><a href="#" id="view_article_link" name="viewArticle">View articles</a></li>
 			      {if $user_logged eq true}
-			      <li name="edit_profile"><a href="#" name="editProfile">Edit profile</a></li>
-			      <li name="add_article"><a href="#" name="addArticle">Add article</a></li>
+			      <li name="edit_profile"><a href="#" id="edit_profile_link" name="editProfile">Edit profile</a></li>
+			      <li name="add_article"><a href="#" id="add_article_link" name="addArticle">Add article</a></li>
                   {if $admin eq true}
-                  <li name="view_users"><a href="#" name="viewUsers">List of users</a></li>
+                  <li name="view_users"><a href="#" id="view_users_link" name="viewUsers">List of users</a></li>
                   {/if}
 			      {/if}
-			      <li name="find_article"><a href="#" name="findArticle">Find article</a></li>
+			      <li name="find_article"><a href="#" id="find_article_link" name="findArticle">Find article</a></li>
 			</ul>
 		</td></tr></table>
 	</div>

@@ -283,4 +283,17 @@
         return $collection->find(array('_id' => array('$in' => $search)));
     }
 
+    function findTopNArticles($field, $count, $order = -1) {
+        $articles = findAllActiveArticles();
+        return $articles->sort(array($field => $order))->limit($count);
+    }
+
+    function findLatestFiveArticles() {
+        return findTopNArticles('published_date', 5);
+    }
+
+    function findFavouritesFiveArticles() {
+        return findTopNArticles('liked_count', 5);
+    }
+
 ?>

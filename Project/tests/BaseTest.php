@@ -8,13 +8,17 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class BaseTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
-    const timeout = 10000;
+    const timeout = 30000;
+
+    public function __construct($selenium = NULL) {
+        $this->selenium = $selenium;
+    }
 
     public function setUp()
     {
         $this->selenium = new Testing_Selenium("*firefox", "http://localhost/Project");
-//        $this->selenium->setTimeout(2000);
         $this->selenium->start();
+        $this->open('forms/home.php');
     }
 
     public function tearDown()
@@ -29,6 +33,11 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->type('username', $username);
         $this->type('password', $password);
         $this->clickAndWait('submit');
+    }
+
+    public function logout() {
+            $this->click('login_sub_menu');
+            $this->clickAndWait('login');
     }
 
     public function waitForElementPresent($id) {
@@ -82,24 +91,20 @@ class BaseTest extends PHPUnit_Framework_TestCase
         return $this->selenium->getText($id);
     }
 
-    public function checked($id) {
-        $this->selenium.check($id);
+    public function check($id) {
+        $this->selenium->check($id);
     }
     
     public function unchecked($id) {
-        $this->selenium.uncheck($id);
-    }
-
-    public function select($id) {
-        $this->selenium.select($id);
+        $this->selenium->uncheck($id);
     }
 
     function isChecked($id) {
-        return $this->selenium.isChecked($id);
+        return $this->selenium->isChecked($id);
     }
 
     function isSelected($id) {
-        return $this->selenium.isSelected($id);
+        return $this->selenium->isSelected($id);
     }
 
     public function waitForEnabledElement($id) {
@@ -119,14 +124,14 @@ class BaseTest extends PHPUnit_Framework_TestCase
     public function waitForElementWithText($id, $text) {
         $this->waitForElementPresent($id);
         $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
-                        . $id . "').innerHTML.indexOf('" . $text . "') != -1";
+                        . $id . "').innerHTML.indexOf('" . $text . "') >= 0";
         $this->waitForCondition($condition);
     }
 
     public function waitForElementWithValue($id, $value) {
         $this->waitForElementPresent($id);
         $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
-                        . $id . "').value.indexOf('" . $value . "') != -1";
+                        . $id . "').value.indexOf('" . $value . "') >= 0";
         $this->waitForCondition($condition);
     }
 
@@ -160,8 +165,16 @@ class BaseTest extends PHPUnit_Framework_TestCase
         return $this->selenium.getXpathCount("//table[@id='" . $id . "']/tr");
     }
 
-    private function waitForCondition($condition) {
+    protected function waitForCondition($condition) {
         $this->assertTrue($this->selenium->waitForCondition($condition, self::timeout));
+    }
+
+    protected function getSelenium() {
+        return $this->selenium;
+    }
+
+    protected function setSelenium($selenium) {
+        $this->selenium = $selenium;
     }
 
 }
