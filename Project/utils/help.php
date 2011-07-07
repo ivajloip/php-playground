@@ -130,7 +130,8 @@
         $smarty = new Smarty;
         $vars += getMessagesForArray(array('title'));
 	    $vars += array('user_logged' => isLoggedId(),
-                        'admin' => isAdmin());
+                       'admin' => isAdmin(),
+                       'display_name' => $_SESSION['display_name']);
         smartyAssign($smarty, $vars);
         $smarty->display($page);
         return $smarty;

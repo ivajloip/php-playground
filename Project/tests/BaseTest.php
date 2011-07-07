@@ -56,6 +56,10 @@ class BaseTest extends PHPUnit_Framework_TestCase
     public function type($id, $text) {
         $this->waitForElementPresent($id);
         $this->selenium->type($id, $text);
+        $this->waitForElementPresent($id);
+        $condition = "selenium.browserbot.getCurrentWindow().document.getElementById('" 
+                        . $id . "').disabled == false";
+        $this->waitForCondition($condition);
     }
 
     public function open($relativeUrl) {
@@ -76,6 +80,26 @@ class BaseTest extends PHPUnit_Framework_TestCase
 
     public function getText($id) {
         return $this->selenium->getText($id);
+    }
+
+    public function checked($id) {
+        $this->selenium.check($id);
+    }
+    
+    public function unchecked($id) {
+        $this->selenium.uncheck($id);
+    }
+
+    public function select($id) {
+        $this->selenium.select($id);
+    }
+
+    function isChecked($id) {
+        return $this->selenium.isChecked($id);
+    }
+
+    function isSelected($id) {
+        return $this->selenium.isSelected($id);
     }
 
     public function waitForEnabledElement($id) {

@@ -10,9 +10,7 @@
             <form id="modal_form" action="{$action}" method="post" class="modal_form">
                 {block name=modalform}{/block}
             </form>
-            <a href="#" class="close">Close</a>
             <div id="description">Something</div>
-            <a href="#forgPass_form" name="forgotten_password" class="forgPass_link">Forgotten password?</a>
         </div>
         <div id="mask"></div>
     </div>

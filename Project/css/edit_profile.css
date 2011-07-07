@@ -1,6 +1,9 @@
 #content{
-	width:50%;
+	width:57%;
 	display:block;
+    margin-left:7%;
+    margin-top:5%;
+    
 }
 
 span.edit_span{
@@ -25,4 +28,5 @@ label{
 
 input.button{
 	text-align:center;
+    margin-left:41%;
 }

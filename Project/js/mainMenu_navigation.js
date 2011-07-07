@@ -1,25 +1,11 @@
 $(document).ready(function(){
-	/*function navigation(page){
-		$("#myDiv").load(page "#content",function(){
-			
-		});)
-	} */
-	
+
 	$('a[name=editProfile]').click(function(){
 		$("#myDiv").load("edit_profile.php #content");
-	});
+   	});
 	
 	$('a[name=addArticle]').click(function(){
-		$("#myDiv").load("add_article.php #content"/*,function(){
-			var session = "<?php= isset($_SESSION['id'])?>";
-			if (session != 1)
-			{				
-				showModalWin('#dialog');
-				closeFunc();
-				passFunc();
-			}
-				
-		}*/);
+		$("#myDiv").load("add_article.php #content");
 	});
 	
 	$('a[name=viewArticle]').click(function(){

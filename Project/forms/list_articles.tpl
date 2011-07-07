@@ -1,6 +1,6 @@
 {extends file="base.tpl"}
     {block name=body}
-        <table class="table_class">
+        <table class="table_class" align="center">
             <tr class="tr_header_class">
                 <th class="th_class">
                     {$table_header_msg}

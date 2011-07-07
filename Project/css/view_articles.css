@@ -1,0 +1,48 @@
+.table_class{
+    margin-left:7%;
+    margin-top:2%;
+    display:block;
+}
+
+td.td_class a{
+    text-decoration:none;
+    color:black;
+}
+
+td.td_class a:hover{
+    text-decoration:underline;
+}
+
+td.td_class a:focus{
+    outline:0;
+}
+
+#submitted_article_title{
+    display:block;
+    text-align:center;
+    width:57%;
+}
+
+#article{
+    display:block;
+    text-align:center;
+    width:57%;
+
+}
+
+#article_details, #like_dislike_buttons, #comment{
+    margin-left:7%;
+    width:57%;
+}
+
+input.like:hover{
+    color:green;
+}
+
+input.dislike:hover{
+    color:red;
+}
+
+input.follow:hover{
+    color:blue;
+}

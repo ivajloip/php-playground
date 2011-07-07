@@ -12,6 +12,7 @@ $(document).ready(function() {
 		$(modWindow).css('top',windowHeight/2 - $(modWindow).height()/2);
 		$(modWindow).css('left',windowWidth/2 - $(modWindow).width()/2);
 		$('#modal_form').css('top',($(modWindow).height())/2 - ($('#modal_form').height())/2);
+        $('#forgPass_form').css('top',($(modWindow).height())/2 - ($('#forgPass_form').height())/2);
 	//	$('#modal_form').css('left',$(modWindow).height()/2 - $('#modal_form').width()/2);
 
 		$('#mask').fadeIn(1000);
@@ -20,7 +21,7 @@ $(document).ready(function() {
 		$(modWindow).fadeIn(2000);
 	}
 	function closeFunc(){
-		$('.window .close').click(function(e) {
+		$('#close').click(function(e) {
 		e.preventDefault();
 		$('#dialog, .window').hide();
 		$('#mask').hide();});
@@ -32,7 +33,7 @@ $(document).ready(function() {
 			var modalWidth=$('#dialog').width();
 			var modalHeight=$('#dialog').height();
 			$('#description').css('top',modalHeight/2-(4/9)*formHeight);
-			$('#description').css('left',modalWidth/2);
+			$('#description').css('left',modalWidth/2+formWidth/4);
 			$('#description').show();
 		});
 
@@ -41,8 +42,8 @@ $(document).ready(function() {
 			var formHeight=$('#modal_form').height();
 			var modalWidth=$('#dialog').width();
 			var modalHeight=$('#dialog').height();
-			$('#description').css('top',modalHeight/2-(0.29)*formHeight);
-			$('#description').css('left',modalWidth/2);
+			$('#description').css('top',modalHeight/2-(0.23)*formHeight);
+			$('#description').css('left',modalWidth/2+formWidth/4);
 			$('#description').show();
 		});
 	
@@ -57,10 +58,10 @@ $(document).ready(function() {
 		$('a[name=forgotten_password]').click(function(e){
 		e.preventDefault();
 		var forgPass=$(this).attr('href');
-		$('#modal_form').load('forgottenPass.php #modal_form',function(){
-		//$('#modal_form').hide();
-		$(forgPass).show();
-		$('a[name=forgotten_password]').hide();}); 
+	        $('#modal_form').load('forgottenPass.php #modal_form',function(){
+	    	$(forgPass).show();
+	    	$('a[name=forgotten_password]').hide();
+            closeFunc()}); 
 		
 	});
 	}
@@ -91,11 +92,13 @@ $(document).ready(function() {
 				$('#test').load('register_form.php #modal_window',function(){
 
 				$(dialog).css('height','300px');
-				$(dialog).css('width','500px');
-				$('#modal_form').css('height','300px');
-				$('#modal_form').css('width','350px');
+				$(dialog).css('width','600px');
+				$('#modal_form').css('height','200px');
+                $('#modal_form').css('margin-top','10.1%');
+				$('#modal_form').css('width','400px');
 				$('#modal_form').css('float','left');
 				$('a[name=forgotten_password]').hide(); 
+                $('#forgPass_form').hide(); 
 		
 				showModalWin(dialog);
 				closeFunc();

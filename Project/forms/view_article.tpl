@@ -1,17 +1,17 @@
 {extends file="base.tpl"}
     {block name=body}
-        <div>
+        <div id="submitted_article_title">
             <h1>
                 <span class="{$article_title_class}">
                     {$article.article_title}
                 </span>
             </h1>
         </div>
-        <div>
+        <div id="article">
             <pre class="{$article_class}">{$article.article}</pre>
         </div>
-
-        <div>
+        <br>
+        <div id="article_details">
             {$article_province_msg}: {$article.province}
             {$author_msg} {$article.publisher_name} 
             {$published_date_mgs} {$article.published_date}
@@ -22,22 +22,21 @@
             <form id="like_form" action="like.php" method="post">
                 <input type="hidden" value="{$article._id}" name="articleId"/>
                 <input type="hidden" value="article" name="type"/>
-                <input type="submit" value="{$liked_msg}" name="like" />
-                <input type="submit" value="{$disliked_msg}" name="dislike" />
-                <input type="submit" value="{$follow_msg}" name="follow" />
+                <input class="like" type="submit" value="{$liked_msg}" name="like" />
+                <input class="dislike" type="submit" value="{$disliked_msg}" name="dislike" />
+                <input class="follow" type="submit" value="{$follow_msg}" name="follow" />
             </form>
         </div>
-
-        <div>
+        <br>
+        <div id="comment">
             <form id="{$form_id}" action="{$action}" method="post" class="{$form_class}">
-                <span class="{$block}">
-                   <label class="{$comment_label_class}" for"comment">{$comment_label_msg}:</label>
-                   <textarea class="{$comment_text_class}" id="comment" name="comment" cols="40" rows="5" ></textarea>
+                <span class="edit_span">
+                   <label class="label" for"comment">{$comment_label_msg}:</label>
+                   <textarea class="input" id="comment" name="comment" cols="40" rows="5" ></textarea>
                 </span>
-                <input class="{$button}" type="submit" name="submit" value="{$submit_msg}" id="submit" />
+                <input class="button" type="submit" name="submit" value="{$submit_msg}" id="submit" />
             </form>
         </div>
-
 <!-- comments -->
         <table class="{$table_class}">
             <tr class="{$tr_header_class}">
@@ -63,8 +62,8 @@
                             <input type="hidden" value="{$comment._id}" name="commentId"/>
                             <input type="hidden" value="{$article._id}" name="articleId"/>
                             <input type="hidden" value="comment" name="type"/>
-                            <input type="submit" value="{$liked_msg}" name="like" />
-                            <input type="submit" value="{$disliked_msg}" name="dislike" />
+                            <input class="like" type="submit" value="{$liked_msg}" name="like" />
+                            <input class="dislike" type="submit" value="{$disliked_msg}" name="dislike" />
                         </form>
                     </div>
                 </td>
