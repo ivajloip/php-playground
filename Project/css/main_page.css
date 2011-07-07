@@ -31,8 +31,7 @@ body{
 	padding:0;
 	margin:0;
     width:100%;
-    list-style:none;
-	
+    list-style:none
 }
 
 #most_popular ul li, #most_searched ul li{
