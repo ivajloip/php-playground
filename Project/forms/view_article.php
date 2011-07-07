@@ -17,5 +17,16 @@
     }
     $article['comments'] = $comments;
     $vars += array('article' => $article, 'action' => '../forms/add_comment.php?id=' . $article_id);
+
+    $file = getFile(getAvatarFileName($article['publisher_id']));
+    if($file == NULL) {
+        // try backup option
+        $file = getFile(getAvatarFileName());
+    }
+    
+    if($file != NULL) {
+        $vars += array('mime_type' => $file->file['type'], 'content' => base64_encode($file->getBytes()));
+    }
+
     genericSmartyDisplay($vars, '../forms/view_article.tpl');
 ?>

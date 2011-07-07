@@ -8,7 +8,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class BaseTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
-    const timeout = 30000;
+    const timeout = 10000;
 
     public function __construct($selenium = NULL) {
         $this->selenium = $selenium;

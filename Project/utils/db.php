@@ -209,9 +209,11 @@
 
     function saveFile($filePath) {
         $type = mime_content_type($filePath);
-        var_dump($type);
         $db = getConnection();
         $grid = $db->getGridFS();
+
+        // removes the file if its already present
+        $grid->remove(array('_id' => $filePath));
         $grid->storeFile($filePath, array('type' => $type, '_id' => $filePath), array('safe' => $safe));
         return true;
     }

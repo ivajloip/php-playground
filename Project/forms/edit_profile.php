@@ -50,6 +50,9 @@
             return NULL;
         }
         $result = array('email' => $_POST['email'], 'display_name' => $_POST['display_name']);
+        
+        $_SESSION['display_name'] = $_POST['display_name']; 
+
         if(!isEmpty($_POST['password'])) {
             $result['password'] = generateHash($_POST['password'], $_POST['username']);
         }
@@ -59,16 +62,20 @@
         if(isAdmin() && !isEmpty($_POST['is_admin']) 
                 && $_POST['is_admin'] == 'true') {
             $result['is_admin'] = true;
+            $_SESSION['admin'] = TRUE;
         }
         else {
             $result['is_admin'] = false;
+            $_SESSION['admin'] = false;
         }
         if(isAdmin() && 
                 !isEmpty($_POST['is_moderator']) && $_POST['is_moderator'] == 'true') {
             $result['is_moderator'] = true;
+            $_SESSION['moderator'] = TRUE; 
         }
         else {
             $result['is_moderator'] = false;
+            $_SESSION['moderator'] = FALSE; 
         }
         if(!isEmpty($_POST['is_active']) && $_POST['is_active'] == 'true') {
             $result['active'] = true;
@@ -88,10 +95,12 @@
             return false;
         }
         if(uploadFile() != 'OK') {
+            $_SESSION['avatar'] = FALSE;
             return false;
         }
         else {
             $update['avatar'] = true;
+            $_SESSION['avatar'] = TRUE;
         }
         $id = getId();
         $user = findUserById($id);

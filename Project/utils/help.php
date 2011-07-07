@@ -36,8 +36,8 @@
                      'password' => generateHash($_POST['password'], $_POST['username']),
                      'display_name' => $_POST['username'],
                      'email' => $_POST['email'],
-                     'is_admin' => false,
-                     'is_moderator' => false,
+                     'is_admin' => FALSE,
+                     'is_moderator' => FALSE,
                      'active' => true);
 
     }
@@ -88,12 +88,13 @@
         redirect2('login_form.php');
     }
 
-    function login($id, $display_name, $admin = false, $moderator = false) {
+    function login($id, $display_name, $admin = FALSE, $moderator = FALSE, $avatar = FALSE) {
         session_start();
         $_SESSION['id'] = $id;
         $_SESSION['display_name'] = $display_name; 
         $_SESSION['admin'] = $admin;
         $_SESSION['moderator'] = $moderator; 
+        $_SESSION['avatar'] = $avatar;
     }
 
     function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, 
@@ -167,7 +168,7 @@
                 return 'Error :' . $_FILES['avatar']['error'] . '<br />';
             } else {
                 $fileTmpName = $_FILES['avatar']['tmp_name'];
-                $filePath = getAvatarFileName();
+                $filePath = getAvatarSaveLocation();
                 if(move_uploaded_file($fileTmpName, $filePath)) {
                     if(saveFile($filePath)) {
                         return 'OK';
@@ -184,9 +185,8 @@
         }
     }
 
-    function getAvatarFileName() {
-        session_start();
-        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $_SESSION['id'] . '_avatar';
+    function getAvatarFileName($id = 'no') {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $id . '_avatar';
     }
 
     function notifyFollowers($followers, $who, $articleId) {
@@ -249,6 +249,10 @@
 
     function generateProfileViewLink($userId) {
         return 'edit_profile.php?id=' . $userId; 
+    }
+
+    function getAvatarSaveLocation() {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $_SESSION['id'] . '_avatar';
     }
 
 ?>
