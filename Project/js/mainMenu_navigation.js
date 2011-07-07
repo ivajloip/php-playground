@@ -19,5 +19,9 @@ $(document).ready(function(){
     $('a[name=viewUsers]').click(function(){
 		$("#myDiv").load("list_users.php #myDiv");
 	});
+    
+    $('a[name=findArticle]').click(function(){
+		$("#myDiv").load("find_article.php #myDiv");
+	});
 	
 });

@@ -13,6 +13,7 @@
 	    <script src="../js/jquery-1.3.2.js" type="text/javascript"></script>
 	    <script src="../js/modal.js" type="text/javascript"></script>
 	    <script src="../js/description.js" type="text/javascript"></script>
+        <script src="../js/image.js" type="text/javascript"></script>
 	    <script src="../js/ajax_requests.js" type="text/javascript"></script>
             <script src="../js/mainMenu_navigation.js" type="text/javascript"></script>
         {block name=head}{/block}
@@ -61,7 +62,7 @@
                   <li name="view_users"><a href="#" name="viewUsers">List of users</a></li>
                   {/if}
 			      {/if}
-			      <li name="about_us"><a href="#" name="aboutUs">About us</a></li>
+			      <li name="find_article"><a href="#" name="findArticle">Find article</a></li>
 			</ul>
 		</td></tr></table>
 	</div>

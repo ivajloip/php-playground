@@ -4,6 +4,9 @@
     display:block;
 }
 
+td.td_class{
+}
+
 td.td_class a{
     text-decoration:none;
     color:black;
@@ -15,6 +18,12 @@ td.td_class a:hover{
 
 td.td_class a:focus{
     outline:0;
+}
+
+th.th_class{
+    text-align:left;
+    border-style:solid;
+    border-width:1px;
 }
 
 #submitted_article_title{
