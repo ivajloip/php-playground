@@ -10,7 +10,10 @@
             <form id="modal_form" action="{$action}" method="post" class="modal_form">
                 {block name=modalform}{/block}
             </form>
-            <div id="description">Something</div>
+            {if $login eq 'login'}
+            <div id="description">Enter your username.</div>
+            
+            {else} <div id="description">Must contain numbers and symbols.</div>{/if}
         </div>
         <div id="mask"></div>
     </div>
