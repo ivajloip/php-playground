@@ -1,5 +1,5 @@
 {extends file="default_form.tpl"}
-            {block name=form}
+        {block name=form}
             <input class="{$input_class}" type="hidden" 
                name="username" id="username" value="{$username_value}"/>
 
@@ -73,4 +73,4 @@
 
 	        <br/>
             <input class="button" type="submit" name="submit" value="{$submit_msg}" id="submit" />
-            {/block}
+        {/block}

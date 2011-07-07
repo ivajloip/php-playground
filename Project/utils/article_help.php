@@ -53,4 +53,14 @@
 
         return $result;
     }
+
+    function displayArticles($articles, $error = NULL) {
+        $vars = getMessagesForArray(array('article_title', 'published_date', 
+                                        'author', 'published_date', 
+                                        'publisher_name', 'article_categories', 
+                                        'article_province'));
+        $vars += array('articles' => $articles,
+                       'error_msg' => $error);
+        genericSmartyDisplay($vars, 'list_articles.tpl');
+    }
 ?>

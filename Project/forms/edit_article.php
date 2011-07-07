@@ -11,7 +11,7 @@
     }
 
     function setAdditionalVars(&$vars, &$provinces, &$categories) {
-        $article = findArticleById($_GET['id'], false);
+        $article = findArticleById($_GET['id'], FALSE);
         if(NULL == $article) {
             $messages = getMessages();
             $error = $messages['error_item_not_found'];
@@ -28,10 +28,10 @@
 
     function parseAdditionalFields() {
         if(!isEmpty($_POST['is_active']) && $_POST['is_active'] == 'true') {
-            $result['active'] = true;
+            $result['active'] = TRUE;
         }
         else {
-            $result['active'] = false;
+            $result['active'] = FALSE;
         }
         return $result;
     }
@@ -42,25 +42,30 @@
             redirect2Home();
             return;
         }
+        $messages = getMessages();
 
-        $db = getConnection();
-        $articles = $db->articles;
         $article = parseArticleFromPost() + parseAdditionalFields();
         if($article == NULL) {
-            $messages = getMessages();
             generateArticleEditForm($messages['error_required_value']);
-            return false;
+            return FALSE;
         }
 
         $id = $_POST['id'];
         if(!isEmpty($id)) {
             $a = findArticleById($id);
-            update($articles, array('_id' => new MongoId($id)), array('$set' => $article), true, false);
+            if(NULL == $a) {
+                generateArticleEditForm($messages['error_general']);
+                return FALSE;
+            }
+
+            $db = getConnection();
+            $articles = $db->articles;
+            update($articles, array('_id' => new MongoId($id)), array('$set' => $article), TRUE, FALSE);
             notifyFollowers($a['followers'], $_SESSION['display_name'], $id);
             redirect2('../forms/view_article.php?id=' . $id);
-            return true;
+            return TRUE;
         }
-        return false;
+        return FALSE;
     }
 
     genericRequestHandler(submitArticle, generateArticleEditForm);
