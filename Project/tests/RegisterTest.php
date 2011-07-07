@@ -35,9 +35,6 @@
             $this->clickAndWait('login');
         }
 
-        public function login() {
-        }
-
         public function checkRegister() {
             $this->user['email'] = 'test';
             $this->register();
