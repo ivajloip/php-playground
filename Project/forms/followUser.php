@@ -3,7 +3,7 @@
 
 	function followUserOnSubmit(){
 		require_once('../utils/db.php');
-        	$db = connect();
+        $db = connect();
 		//$users = $db->users;
 		$userToFollow=findUserByUsername($_POST['username']);
 		if ($userToFollow)
@@ -12,6 +12,7 @@
 			$messages = getMessages();
 			displayUserToFollowForm($messages['error_no_such_user']);
 		}
+        redirect2Home();
 	}
 	
 	function displayUserToFollowForm($error = NULL){

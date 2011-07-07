@@ -13,6 +13,7 @@
             $this->login('ivo','test');
             $this->addArticle();
             $this->checkArticle();
+            $this->viewArticle();
         }
 
         private function addArticle() {

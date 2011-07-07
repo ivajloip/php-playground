@@ -2,6 +2,7 @@
     margin-left:7%;
     margin-top:2%;
     display:block;
+    width:58%;
 }
 
 td.td_class{
@@ -34,7 +35,7 @@ th.th_class{
 
 #article{
     display:block;
-    text-align:center;
+    margin-left:7%;
     width:57%;
 
 }

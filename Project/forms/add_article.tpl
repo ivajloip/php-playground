@@ -12,12 +12,7 @@
                 <textarea class="input" id="article" name="article" cols="50" rows="6">{$article}</textarea>
                 <br/>
             </span>
-            <span id="article_image">
-                <form id="image_form" action="image.php">
-                    <input class="input" id="article_image" name="article_image" type="text" value="{$article_image}"/>
-                </form>
-            </span>
-            <br>
+            
             <!-- province select -->
             <span class="edit_span">
                 <label class="label" for="province">{$article_province_msg}:</label>
