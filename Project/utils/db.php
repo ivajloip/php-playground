@@ -267,10 +267,20 @@
 
     function findCategoriesByIds($ids) {
         $db = getConnection();
+        return findItemsByIds($db->categories, $ids);
+    }
+
+    function findProvincesByIds($ids) {
+        $db = getConnection();
+        return findItemsByIds($db->provinces, $ids);
+    }
+
+    function findItemsByIds($collection, $ids) {
         $search = array();
         foreach($ids as $id) {
             $search[] = new MongoId($id);
         }
-        return $db->categories->find(array('_id' => array('$in' => $search)));
+        return $collection->find(array('_id' => array('$in' => $search)));
     }
+
 ?>

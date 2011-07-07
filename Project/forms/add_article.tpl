@@ -38,6 +38,7 @@
                 </select>
             </span>
 
+            {block name=additional_fields}{/block}
             <br>
             <input class="button" type="submit" name="submit" value="{$submit_msg}" id="submit" />
         {/block}

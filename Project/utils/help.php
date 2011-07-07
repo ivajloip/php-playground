@@ -239,12 +239,16 @@
         return preg_replace('/@@pic url\=\{(.+?)\}@@/', '<img src="$1" alt="picture" style="display:block" />', $text);
     }
 
+    function getServerUrl() {
+        return 'http://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/';
+    }
+
     function generateArticleViewLink($articleId) {
-        return 'http://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/view_article.php?id=' . $articleId; 
+        return 'view_article.php?id=' . $articleId; 
     }
 
     function generateProfileViewLink($userId) {
-        return 'http://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/forms/edit_profile.php?id=' . $userId; 
+        return 'edit_profile.php?id=' . $userId; 
     }
 
 ?>
