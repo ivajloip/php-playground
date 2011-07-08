@@ -77,3 +77,9 @@ input.follow:hover{
 ._label{
     margin-left:7%;
 }
+
+.picture {
+    display: block;
+    margin: 7%;
+    width: 86%;
+}

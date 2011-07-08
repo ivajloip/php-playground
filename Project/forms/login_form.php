@@ -9,18 +9,26 @@
         genericSmartyDisplay($vars, "../forms/username_password_form.tpl");
     }
 
+    function parseUserAndPasswordFromPost() {
+        if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
+            return NULL;
+        }
+        return array('username' => $_POST['username'], 
+                     'password' => generateHash($_POST['password'], $_POST['username']));
+    }
+
     function submitLogin() {
         require_once('../utils/db.php');
         $db = connect();
         $users = $db->users;
-        $user = parse_user_and_password_from_post();
+        $user = parseUserAndPasswordFromPost();
         $messages = getMessages();
-        if($user == NULL) {
+        if(NULL == $user) {
             generateLoginForm($messages['error_required_value']);
             return;
         }
         $result = $users->findOne(array('username' => $user['username'], 'password' => $user['password'], 'active' => true));
-        if($result == NULL) {
+        if(NULL == $result) {
             generateLoginForm($messages['error_incorrect_login']);
             return;
         }
@@ -30,5 +38,4 @@
     }
 
     genericRequestHandler(submitLogin, redirect2Home, generateLoginForm);
-
 ?>

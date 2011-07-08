@@ -18,7 +18,7 @@
         }
         else {
             $vars += getMessagesForArray(array('is_active')) + 
-                     array('id' => $_GET['id'], 'article' => $article['article'],
+                     array('id' => $_GET['id'], 'article' => removeImageTags($article['article']),
                            'article_title' => $article['article_title'],
                            'is_active_checked' => $article['active'] ? 'checked' : '');
             markSelected($provinces, array($article['province']));

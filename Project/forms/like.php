@@ -6,7 +6,7 @@
 
     require_once('../utils/help.php');
     require_once('../utils/db.php');
-    if(!isLoggedId()) {
+    if(!isLoggedIn()) {
         redirect2Login();
         return;
     }

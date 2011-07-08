@@ -4,22 +4,22 @@
         $config = parse_ini_file($config_file);
         $auth = "";
         if(isset($config['username']) && !isEmpty($config['username'])) {
-            $auth = $config['username'].':'.$config['password'].'@';
+            $auth = $config['username'] . ':' . $config['password'] . '@';
         }
-        $conn = new Mongo('mongodb://'.$auth.$config['url'].':'.$config['port']);
+        $conn = new Mongo('mongodb://' . $auth . $config['url'] . ':' . $config['port']);
         return $conn->projectdb;
     }
 
     function getConnection() {
         global $db;
-        if($db == NULL) {
+        if(NULL == $db) {
             $db = connect();
         }
         return $db;
     }
 
     function generateHash($plain, $username, $salt = NULL) {
-         if ($salt === NULL)
+         if (NULL === $salt)
          {
              $salt = substr(md5($username), 0, SALT_LENGTH / 2) . substr(md5($plain), 0, SALT_LENGTH / 2);
          }
@@ -30,34 +30,34 @@
         return $salt . sha1($salt . $plainText);
     }
 
-    function insert($collection, $array, $safe = true) {
+    function insert($collection, $array, $safe = TRUE) {
         try {
             $collection->insert($array, $safe);
         }
         catch(MongoCursorException $e) {
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
-    function save($collection, $array, $save = true) {
+    function save($collection, $array, $save = TRUE) {
         try {
             $collection->save($array, array('safe' => $safe));
         }
         catch(MongoCursorException $e) {
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
-    function update($collection, $query, $array, $safe = true, $multiple = true) {
+    function update($collection, $query, $array, $safe = TRUE, $multiple = TRUE) {
         try {
             $collection->update($query, $array, array('multiple' => $multiple, 'safe' => $safe));
         }
         catch(MongoCursorException $e) {
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
     function findAll($collection) {
@@ -70,7 +70,7 @@
     }
 
     function findAllActive($collection) {
-        return $collection->find(array('active' => true));
+        return $collection->find(array('active' => TRUE));
     }
 
     function findAllActiveArticles() {
@@ -78,14 +78,14 @@
         return findAllActive($db->articles);
     }
 
-    function findById($id, $collection, $checkActive = true) {
+    function findById($id, $collection, $checkActive = TRUE) {
         return findByUniqueField('_id', new MongoId($id), $collection, $checkActive);
     }
 
-    function findByUniqueField($fieldName, $fieldValue, $collection, $checkActive = true) {
+    function findByUniqueField($fieldName, $fieldValue, $collection, $checkActive = TRUE) {
         $query = array($fieldName => $fieldValue);
         if($checkActive) {
-            $query['active'] = true;
+            $query['active'] = TRUE;
         }
         return $collection->findOne($query);
     }
@@ -97,23 +97,23 @@
 
     function findUserById($id) {
         $db = getConnection();
-        return findById($id, $db->users, false);
+        return findById($id, $db->users, FALSE);
     }
 
-    function findUserByUniqueField($fieldName, $fieldValue, $checkActive = true) {
+    function findUserByUniqueField($fieldName, $fieldValue, $checkActive = TRUE) {
         $db = getConnection();
         return findByUniqueField($fieldName, $fieldValue, $db->users, $checkActive);
     }
 
-    function findUserByEmail($email, $checkActive = true) {
+    function findUserByEmail($email, $checkActive = TRUE) {
         return findUserByUniqueField('email', $email, $checkActive);
     }
 
-    function findUserByUsername($username, $checkActive = true) {
+    function findUserByUsername($username, $checkActive = TRUE) {
         return findUserByUniqueField('username', $username, $checkActive);
     }
 
-    function findArticleById($id, $checkActive = true) {
+    function findArticleById($id, $checkActive = TRUE) {
         $db = getConnection();
         return findById($id, $db->articles, $checkActive);
     }
@@ -215,7 +215,7 @@
         // removes the file if its already present
         $grid->remove(array('_id' => $filePath));
         $grid->storeFile($filePath, array('type' => $type, '_id' => $filePath), array('safe' => $safe));
-        return true;
+        return TRUE;
     }
 
     function getFile($fileName) {
@@ -234,7 +234,7 @@
         // if the author is appropriate, change it and save the article
         $db->execute("db.articles.find({'comments.publisher_id' : ObjectId(\"" . $id . "\")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId(\"" . $id . "\").toString() && ( z.publisher_name = '$display_name' ); }); db.articles.save(x); });"); 
         $articles = $db->articles;
-        $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => true, 'safe' => true));
+        $articles->update(array('publisher_id' => $id), array('$set' => array('publisher_name' => $display_name)), array('multiple' => TRUE, 'safe' => TRUE));
     }
 
     function updateEmail($oldEmail, $newEmail) {
@@ -259,7 +259,7 @@
 
     function findProvinceById($id) {
         $db = getConnection();
-        return findById($id, $db->provinces, false);
+        return findById($id, $db->provinces, FALSE);
     }
 
     function findAllCategories() {

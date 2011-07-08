@@ -10,7 +10,7 @@
 
     function getMessages($filename = '../forms/messages.ini') {
         global $messages;
-        if($messages == NULL) {
+        if(NULL == $messages) {
             $messages = parse_ini_file($filename);
             if(!$messages) {
                 die('Server error, missing localization files');
@@ -19,44 +19,13 @@
         return $messages;
     }
 
-    function parse_user_and_password_from_post() {
-        if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
-            return NULL;
-        }
-        return array('username' => $_POST['username'], 
-                     'password' => generateHash($_POST['password'], $_POST['username']));
-    }
-
-    function parse_user_reg_info_from_post() {
-        if(isEmpty($_POST['username']) || isEmpty($_POST['password']) || isEmpty($_POST['confirm_password']) || isEmpty($_POST['email']) 
-            || $_POST['password'] != $_POST['confirm_password'] || strlen($_POST['username']) < 3 || strlen($_POST['password']) < 6) {
-            return NULL;
-        }
-        return array('username' => $_POST['username'], 
-                     'password' => generateHash($_POST['password'], $_POST['username']),
-                     'display_name' => $_POST['username'],
-                     'email' => $_POST['email'],
-                     'is_admin' => FALSE,
-                     'is_moderator' => FALSE,
-                     'active' => true);
-
-    }
-
     function smartyAssign($smarty, $assignArray) {
         foreach($assignArray as $key => $value) {
             $smarty->assign($key, $value);
         }
     }
 
-    function escapeArray($array) {
-        $result = array();
-        foreach($array as $key=>$value) {
-            $result[$key] = addslashes($value);
-        }
-        return $result;
-    }
-
-    function isLoggedId() {
+    function isLoggedIn() {
         session_start();
         return isset($_SESSION['id']);
     }
@@ -77,6 +46,7 @@
     
     function redirect2Home() {
         redirect2('home.php');   
+         die($messages['error_general']);
     }
 
     function redirect2($path) {
@@ -86,6 +56,7 @@
 
     function redirect2Login() {
         redirect2('login_form.php');
+        die($messages['error_general']);
     }
 
     function login($id, $display_name, $admin = FALSE, $moderator = FALSE, $avatar = FALSE) {
@@ -100,26 +71,26 @@
     function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, 
                 $exec_if_not_logged = redirect2Login, $exec_otherwise = redirect2Home) {
 
-        if(!isLoggedId() && !isFormSubmitted()) {
-            if($exec_if_not_logged != NULL) {
+        if(!isLoggedIn() && !isFormSubmitted()) {
+            if(NULL != $exec_if_not_logged) {
                 $exec_if_not_logged();
                 return;
             }
         }
         else if(isFormSubmitted()) {
-            if($exec_if_submit != NULL) {
+            if(NULL != $exec_if_submit) {
                 $exec_if_submit();
                 return;
             }
         }
-        else if(isLoggedId() && !isFormSubmitted()) {
-            if($exe_if_logged_not_submitted != NULL) {
+        else if(isLoggedIn() && !isFormSubmitted()) {
+            if(NULL != $exe_if_logged_not_submitted) {
                 $exe_if_logged_not_submitted();
                 return;
             }
         }
         else {
-            if($exec_otherwise != NULL) {
+            if(NULL != $exec_otherwise) {
                 $exec_otherwise();
                 return;
             }
@@ -130,11 +101,13 @@
         require_once('../libs/Smarty.class.php');
         $smarty = new Smarty;
         $vars += getMessagesForArray(array('title'));
-	    $vars += array('user_logged' => isLoggedId(),
+	    $vars += array('user_logged' => isLoggedIn(),
                        'admin' => isAdmin(),
                        'display_name' => $_SESSION['display_name'],
                        'latest' => findLatestFiveArticles(),
                        'most_liked' => findFavouritesFiveArticles());
+
+        // make sure error_msg is set
         if(!isset($vars['error_msg']) || isEmpty($vars['error_msg'])) {
             $vars['error_msg'] = '';
         }
@@ -154,7 +127,7 @@
 
     function removeValueFromArray(array &$array, $value) {
         $key = array_search($value, $array);
-        if($key !== FALSE) {
+        if(FALSE !== $key) {
             unset($array[$key]);
             return TRUE;
         }
@@ -241,7 +214,11 @@
     // replaces our own tag -> @@pic url={some_url}@@ with 
     // <img src="some_url" alt="picture" />
     function addImageTags($text) {
-        return preg_replace('/@@pic url\=\{(.+?)\}@@/', '<img src="$1" alt="picture" style="display:block" />', $text);
+        return preg_replace('/@@pic url\=\{(.+?)\}@@/', '<img src="$1" alt="picture" class="picture" />', $text);
+    }
+
+    function removeImageTags($text) {
+        return preg_replace('#\<img src\=\"(.+?)\" alt\=\"picture\" class\=\"picture\" \/\>#', '@@pic url={$1}@@', $text);
     }
 
     function getServerUrl() {

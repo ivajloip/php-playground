@@ -44,10 +44,10 @@
         return true;
     }
 
-    if(!isLoggedId()) {
-        redirect2Login();
-    } else if(isFormSubmitted()) {
+    function onSubmit() {
         submitComment();
         redirect2('../forms/view_article.php?id=' . $_GET['id']);
     }
+
+    genericRequestHandler(onSubmit, redirect2Login);
 ?>

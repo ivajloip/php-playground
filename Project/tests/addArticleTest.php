@@ -13,7 +13,7 @@
             $this->login('ivo','test');
             $this->addArticle();
             $this->checkArticle();
-            $this->viewArticle();
+#            $this->viewArticle();
         }
 
         private function addArticle() {
@@ -27,7 +27,7 @@
     
         private function checkArticle() {
             $this->waitForElementWithText('article_title', htmlspecialchars($this->article['article_title']));
-            $this->waitForElementWithText('article_body', htmlspecialchars($this->article['article']));
+            $this->waitForElementWithText('article', htmlspecialchars($this->article['article']));
         }
     }
 ?>
