@@ -247,11 +247,11 @@
     }
 
     function generateArticleViewLink($articleId) {
-        return 'view_article.php?id=' . $articleId; 
+        return getServerUrl() . 'view_article.php?id=' . $articleId; 
     }
 
     function generateProfileViewLink($userId) {
-        return 'edit_profile.php?id=' . $userId; 
+        return getServerUrl() . 'edit_profile.php?id=' . $userId; 
     }
 
     function getAvatarSaveLocation() {
