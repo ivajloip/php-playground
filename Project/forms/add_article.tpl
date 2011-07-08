@@ -12,6 +12,12 @@
                 <textarea class="input" id="article" name="article" cols="50" rows="6">{$article}</textarea>
                 <br/>
             </span>
+
+            <span class="edit_span" id="image_input">
+                <label class="label" for="image_url">{$image_add_label_msg}:</label>
+                <input class="input" id="image_url" type="text"/>
+                <input class="button" type="button" onclick="addCustomPicTag();" value="{$add_msg}"/>
+            </span>
             
             <!-- province select -->
             <span class="edit_span">
