@@ -1,7 +1,7 @@
 <?php
     require_once('../utils/article_help.php');
     
-    function generateArticleEditForm($error = NULL) {
+    function generateArticleEditForm($error = '') {
         if(!isModerator()) {
             redirect2Home();
             return;

@@ -15,7 +15,7 @@
         redirect2Home();
 	}
 	
-	function displayUserToFollowForm($error = NULL){
+	function displayUserToFollowForm($error = ''){
 		$vars = getMessagesForArray(array('username', 'submit'));
 		$vars += array('action' => '../forms/followUser.php',
 				'error_msg' => $error); 

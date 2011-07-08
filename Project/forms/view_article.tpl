@@ -19,7 +19,7 @@
 
             {$article_province_msg}: {$article.province}
             {$author_msg} {$article.publisher_name} 
-            {$published_date_mgs} {$article.published_date->sec|date_format:"h:i:s M d, Y"}
+            {$published_date_msg} {$article.published_date->sec|date_format:"h:i:s M d, Y"}
             {$liked_msg}: {$article.liked_count} {$disliked_msg}: {$article.disliked_count}
         </div>
 
@@ -67,7 +67,7 @@
                     </div>
                     <div class="{$comment_info}">
                         {$author_msg} {$comment.publisher_name} 
-                        {$published_date_mgs} {$comment.published_date->sec|date_format:"h:i:s M d, Y"}
+                        {$published_date_msg} {$comment.published_date->sec|date_format:"h:i:s M d, Y"}
                         {$liked_msg} {$comment.liked_count} 
                         {$disliked_msg} {$comment.disliked_count}
                         <form id="like_form" action="like.php" method="post">

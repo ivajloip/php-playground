@@ -3,7 +3,7 @@
     function connect($config_file = '/home/project/connection.ini') {
         $config = parse_ini_file($config_file);
         $auth = "";
-        if(!isEmpty($config['username'])) {
+        if(isset($config['username']) && !isEmpty($config['username'])) {
             $auth = $config['username'].':'.$config['password'].'@';
         }
         $conn = new Mongo('mongodb://'.$auth.$config['url'].':'.$config['port']);
@@ -278,6 +278,9 @@
     }
 
     function findItemsByIds($collection, $ids) {
+        if(NULL == $ids || count($ids) < 1) {
+            return NULL;
+        }
         $search = array();
         foreach($ids as $id) {
             $search[] = new MongoId($id);
