@@ -29,7 +29,7 @@
 
     function parse_user_reg_info_from_post() {
         if(isEmpty($_POST['username']) || isEmpty($_POST['password']) || isEmpty($_POST['confirm_password']) || isEmpty($_POST['email']) 
-            || $_POST['password'] != $_POST['confirm_password']) {
+            || $_POST['password'] != $_POST['confirm_password'] || strlen($_POST['username']) < 3 || strlen($_POST['password']) < 6) {
             return NULL;
         }
         return array('username' => $_POST['username'], 
@@ -246,11 +246,11 @@
     }
 
     function generateArticleViewLink($articleId) {
-        return 'view_article.php?id=' . $articleId; 
+        return getServerUrl() . 'view_article.php?id=' . $articleId; 
     }
 
     function generateProfileViewLink($userId) {
-        return 'edit_profile.php?id=' . $userId; 
+        return getServerUrl() . 'edit_profile.php?id=' . $userId; 
     }
 
     function getAvatarSaveLocation() {

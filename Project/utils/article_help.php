@@ -8,7 +8,8 @@
 
         $vars = getMessagesForArray(
                     array('article_label', 'article_title', 'empty_value',
-                          'submit', 'article_province', 'article_categories'));
+                          'submit', 'article_province', 'article_categories',
+                          'add', 'image_add_label'));
 
         if(NULL != $execAlso) {
             $execAlso($vars, $provinces, $categories);   

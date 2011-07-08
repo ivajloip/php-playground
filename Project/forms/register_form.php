@@ -2,7 +2,6 @@
     require_once('../utils/help.php');
 
     function generateRegisterForm($error = NULL) {
-        $messages = getMessages();
         $vars = getMessagesForArray(array('login', 'password', 
                     'confirm_password', 'email', 'submit', 'title'));
         $vars += array('action' => "../forms/register_form.php",
@@ -16,7 +15,7 @@
     function register_user() {
         require_once('../utils/db.php');
         $messages = getMessages();
-        $db = connect('/home/project/connection.ini');
+        $db = getConnection();
         $users = $db->users;
         $user = parse_user_reg_info_from_post();
         if($user == NULL) {

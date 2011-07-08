@@ -2,31 +2,37 @@
     require_once('../utils/help.php');
 
     function generatePage($error = NULL) {
-        $vars = getMessagesForArray(array('article_categories'));
+        $vars = getMessagesForArray(array('category', 'submit'));
         $vars += array('action' => "../forms/add_category.php",
                        'error_msg' => $error);
-        genericSmartyDisplay($vars, "../forms/register_form.tpl");
+        genericSmartyDisplay($vars, "../forms/add_category.tpl");
+    }
+
+    function parseCategory() {
+        if(isEmpty($_POST['name'])) {
+            return NULL;
+        }
+        return array('name' => $_POST['name']);
     }
 
     function addCategory() {
         require_once('../utils/db.php');
         $messages = getMessages();
-        $db = connect('/home/project/connection.ini');
-        $users = $db->users;
-        $user = parse_user_reg_info_from_post();
-        if($user == NULL) {
-            generateRegisterForm($messages['error_registering_user']);
-            return false;
+        $db = getConnection();
+        $categories = $db->categories;
+        $category = parseCategory();
+        if($category == NULL) {
+            generatePage($messages['error_required_value']);
+            return FALSE;
         }
-        if(!insert($users, $user)) {
-            generateRegisterForm($messages['error_dublicating_user_info']);
-            return false;
+        if(!insert($categories, $category)) {
+            generatePage($messages['error_general']);
+            return FALSE;
         }
-        login($user['_id'], $user['display_name']);
-        redirect2('edit_profile.php');
-        return true;
+        redirect2Home();
+        return TRUE;
     }
 
-    genericRequestHandler(register_user, redirect2Login, generateRegisterForm);
+    genericRequestHandler(addCategory, generatePage);
 
 ?>
