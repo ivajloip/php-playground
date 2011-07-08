@@ -56,8 +56,13 @@ body{
 	background-color:#82d23d;
 }
 
-#_most{
+div._most{
     font-weight:bold;
+    background-color:#82d23d;
+    border-radius:15%;
+	border-radius:15%;
+	-moz-border-radius:15%;
+	-moz-border-radius:15%;
 }
 #footer{
     width:100%;

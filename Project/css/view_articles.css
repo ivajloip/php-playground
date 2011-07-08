@@ -73,3 +73,7 @@ input.follow:hover{
 #edit a:focus{
     outline:0;
 }
+
+._label{
+    margin-left:7%;
+}

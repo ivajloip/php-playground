@@ -8,7 +8,7 @@
             </h1>
         </div>
         <div id="article">
-            <pre id="article_body" class="{$article_class}">{$article.article}</pre>
+            {$article.article}
         </div>
         <br>
         <div id="article_details">
@@ -32,19 +32,19 @@
                 <input class="follow" type="submit" value="{$follow_msg}" name="follow" />
             </form>
         </div>
-       <br>
-	 {if moderator eq true}
+        <br>
+        {if $moderator == true}
         <div id="edit">
             <a href="edit_article.php?id={$article._id}">Edit</a>
         </div>
         {/if}
 
-        <br>
+        <br><br>
         <div id="comment_section">
             <form id="{$form_id}" action="{$action}" method="post" class="{$form_class}">
-                <span class="edit_span">
-                   <label class="label" for"comment">{$comment_label_msg}:</label>
-                   <textarea class="input" id="comment" name="comment" cols="40" rows="5" ></textarea>
+                <span class="">
+                   <label class="_label" for"comment">{$comment_label_msg}:</label><br>
+                   <textarea class="" id="comment" name="comment" cols="40" rows="5" ></textarea>
                 </span>
                 <input class="button" type="submit" name="submit" value="{$submit_msg}" id="submit" />
             </form>

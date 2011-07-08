@@ -68,7 +68,7 @@
     <div id="most">
 		<div id="most_popular">
 			<ul>
-				<li id="_most"><a href="#">Latest</a></li>
+				<li><div class="_most"><a href="#">Latest</a></div></li>
 					<ul>
                         {foreach from=$latest item=latest_item}
                             <li><a href="view_article.php?id={$latest_item._id}">{$latest_item.article_title}</a></li>
@@ -81,7 +81,7 @@
         <br></br>
 	    <div id="most_searched">
 		<ul>
-			<p><li id="_most"><a href="#">Most liked</a></li>
+			<p><li><div class="_most"><a href="#">Most liked</a></div></li>
 				<ul>
                     {foreach from=$most_liked item=liked}
                             <li><a href="view_article.php?id={$liked._id}">{$liked.article_title}</a></li>

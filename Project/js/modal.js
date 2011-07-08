@@ -20,14 +20,16 @@ $(document).ready(function() {
 			
 		$(modWindow).fadeIn(2000);
 	}
-	function closeFunc(){
+	function closeFunc() {
 		$('#close').click(function(e) {
 		e.preventDefault();
 		$('#dialog, .window').hide();
 		$('#mask').hide();});
 	}
-	function descriptionFunc(){
-		$('input[name=username]').focus(function(){
+	function descriptionFunc() {
+		$('input[name=username]').focus(function() {
+            description = document.getElementById('description');
+            description.innerHTML = 'Enter username';
 			var formWidth=$('#modal_form').width();
 			var formHeight=$('#modal_form').height();
 			var modalWidth=$('#dialog').width();
@@ -38,6 +40,8 @@ $(document).ready(function() {
 		});
 
 		$('input[name=password]').focus(function(){
+            description = document.getElementById('description');
+            description.innerHTML = 'Enter password';
 			var formWidth=$('#modal_form').width();
 			var formHeight=$('#modal_form').height();
 			var modalWidth=$('#dialog').width();

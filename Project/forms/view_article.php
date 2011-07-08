@@ -11,7 +11,7 @@
                                       'submit', 'title', 'published_date',
                                       'author', 'article_province', 'follow'));
     $comments = $article['comments'];
-    $vars += array('article' => $article, 'action' => '../forms/add_comment.php?id=' . $article_id);
+    $vars += array('article' => $article, 'action' => '../forms/add_comment.php?id=' . $article_id, 'moderator' => isModerator());
 
     $file = getFile(getAvatarFileName($article['publisher_id']));
     if($file == NULL) {
