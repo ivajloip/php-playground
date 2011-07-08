@@ -35,13 +35,16 @@
 
     function parseArticleFromPost() {
         $province = findProvinceById($_POST['province']);
-        $categoriesSelected = findCategoriesByIds($_POST['categories']);
-        $categoriesNames = array();
-        foreach($categoriesSelected as $category) {
-            $categoriesNames[] = $category['name'];
-        }
         if(isEmpty($_POST['article']) || isEmpty($province)) {
             return NULL;
+        }
+
+        $categoriesSelected = findCategoriesByIds($_POST['categories']);
+        $categoriesNames = array();
+        if(NULL != $categoriesSelected) {
+            foreach($categoriesSelected as $category) {
+                $categoriesNames[] = $category['name'];
+            }
         }
 
         $result = array('article' =>  addImageTags(htmlspecialchars($_POST['article'], ENT_QUOTES)), 

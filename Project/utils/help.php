@@ -135,6 +135,9 @@
                        'display_name' => $_SESSION['display_name'],
                        'latest' => findLatestFiveArticles(),
                        'most_liked' => findFavouritesFiveArticles());
+        if(!isset($vars['error_msg']) || isEmpty($vars['error_msg'])) {
+            $vars['error_msg'] = '';
+        }
         smartyAssign($smarty, $vars);
         $smarty->display($page);
         return $smarty;

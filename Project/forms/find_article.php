@@ -2,7 +2,7 @@
     require_once('../utils/help.php');
     require_once('../utils/article_help.php');
     
-    function generateSearchForm($error = NULL) {
+    function generateSearchForm($error = '') {
         $provinces = findAllProvinces();
         $categories = findAllCategories();
         $vars = getMessagesForArray(array('text_contained_in_body', 'publisher',

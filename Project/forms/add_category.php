@@ -1,7 +1,7 @@
 <?php
     require_once('../utils/help.php');
 
-    function generatePage($error = NULL) {
+    function generatePage($error = '') {
         $vars = getMessagesForArray(array('category', 'submit'));
         $vars += array('action' => "../forms/add_category.php",
                        'error_msg' => $error);

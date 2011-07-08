@@ -1,7 +1,7 @@
 <?php
     require_once('../utils/help.php');
 
-    function generateRegisterForm($error = NULL) {
+    function generateRegisterForm($error = '') {
         $vars = getMessagesForArray(array('login', 'password', 
                     'confirm_password', 'email', 'submit', 'title'));
         $vars += array('action' => "../forms/register_form.php",

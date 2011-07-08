@@ -2,17 +2,17 @@
     require_once('../utils/article_help.php');
 
 
-    function generateNewArticleForm($error = NULL) {
+    function generateNewArticleForm($error = '') {
         generateArticleForm('../forms/add_article.tpl', NULL, $error);
     }
 
     function submitArticle() {
-        $messages = getMessages();
         $db = getConnection();
         $articles = $db->articles;
         $article = parseArticleFromPost();
+        $messages = getMessages();
         if($article == NULL) {
-            generateArticleForm($messages['error_required_value']);
+            generateNewArticleForm($messages['error_required_value']);
             return false;
         }
 
@@ -28,7 +28,7 @@
 
         $inserted = insert($articles, $article);
         if(!inserted) {
-            generateArticleForm($messages['error_general']);
+            generateNewArticleForm(NULL, $messages['error_general']);
             return false;
         }
         $id = $article['_id'];

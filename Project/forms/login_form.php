@@ -1,7 +1,7 @@
 <?php
     require_once('../utils/help.php');
 
-    function generateLoginForm($error = NULL) {
+    function generateLoginForm($error = '') {
         $vars = getMessagesForArray(
                     array('login', 'password', 'submit', 'title'));
         $vars += array('action' => '../forms/login_form.php',
