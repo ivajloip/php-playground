@@ -134,8 +134,7 @@
                        'admin' => isAdmin(),
                        'display_name' => $_SESSION['display_name'],
                        'latest' => findLatestFiveArticles(),
-                       'most_liked' => findFavouritesFiveArticles()
-                       'login' => login);
+                       'most_liked' => findFavouritesFiveArticles());
         smartyAssign($smarty, $vars);
         $smarty->display($page);
         return $smarty;
