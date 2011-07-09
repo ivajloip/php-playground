@@ -141,6 +141,7 @@
         }
 
         $limit = 200000;
+        $messages = getMessages();
         if ($_FILES['avatar']['size'] < $limit) {
             if ($_FILES['avatar']['error'] > 0) {
                 return 'Error :' . $_FILES['avatar']['error'] . '<br />';
@@ -151,15 +152,15 @@
                     if(saveFile($filePath)) {
                         return 'OK';
                     } else {
-                        return 'error_db_filesave';
+                        return $messages['error_general'];
                     }
                 }
                 else {
-                    return 'error_move_failed';
+                    return $messages['error_general'];
                 }
             }
         } else {
-            return 'error_file_size';
+            return $messages['error_file_size'];
         }
     }
 

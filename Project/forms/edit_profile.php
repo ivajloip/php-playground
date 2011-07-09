@@ -9,7 +9,7 @@
         return $_SESSION['id'];
     }
 
-    function generateEditProfileForm() {
+    function generateEditProfileForm($error = '') {
         $id = getId();
         $user = findUserById($id);
 
@@ -30,16 +30,18 @@
                        'is_moderator_checked' => 
                             $user['is_moderator'] ? 'checked' : '',
                        'is_active_checked' => $user['active'] ? 'checked' : '',
-			'user_logged' => isLoggedIn());
+			           'user_logged' => isLoggedIn(),
+                       'error_msg' => $error);
         genericSmartyDisplay($vars, "../forms/edit_profile.tpl");
     }
 
     function validate() {
         if(((!isEmpty($_POST['password']) && !isEmpty($_POST['confirm_password']) && 
-                        $_POST['password'] == $_POST['confirm_password']) 
+                        $_POST['password'] == $_POST['confirm_password'] && 
+                        strlen($_POST['password']) > 5) 
                     || (isEmpty($_POST['password']) && isEmpty($_POST['confirm_password'])))
                 && !isEmpty($_POST['email']) && !isEmpty($_POST['display_name']) 
-                && strlen($_POST['username']) > 2 && strlen($_POST['password']) > 5) {
+                ) {
             return TRUE;
         }
         return FALSE;
@@ -93,10 +95,13 @@
         $users = $db->users;
         $update = parseEditInfoFromPost();
         if(NULL == $update) {
+            generateNewArticleForm($messages['error_required_value']);
             return FALSE;
         }
-        if('OK' != uploadFile()) {
+        $uploadResult = uploadFile();
+        if('OK' != $uploadResult) {
             $_SESSION['avatar'] = FALSE;
+            generateEditProfileForm($uploadResult);
             return FALSE;
         }
         else {
