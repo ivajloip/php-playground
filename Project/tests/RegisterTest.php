@@ -14,34 +14,38 @@
         }
 
         public function testRegister() {
-            $this->register();
-            $this->logout();
-            $this->login($this->user['username'], $this->user['password']);
-            $this->logout();
-            $this->checkRegister();
+            RegisterTest::register($this, $this->user);
+            RegisterTest::checkRegister($this, $this->user);
         }
 
-        public function register() {
-            $this->click('login_sub_menu');
-            $this->click('register');
-            $this->waitForElementVisible('username');
-            $this->type('username', $this->user['username']);
-            $this->type('password', $this->user['password']);
-            $this->type('confirm_password', $this->user['password']);
-            $this->type('email', $this->user['email']);
-            $this->clickAndWait('submit');
+        public static function register($test, $user) {
+            $test->click('login_sub_menu');
+            $test->click('register');
+            $test->waitForElementVisible('username');
+            $test->type('username', $user['username']);
+            $test->type('password', $user['password']);
+            $test->type('confirm_password', $user['password']);
+            $test->type('email', $user['email']);
+            $test->clickAndWait('submit');
         }
 
-        public function checkRegister() {
-            $this->user['email'] = 'test';
-            $this->register();
+        public function checkRegister($test, &$user) {
+            // we can login
+            $test->logout();
+            $test->login($user['username'], $user['password']);
+            $test->logout();
+
+            // we can not register with the same username or email
+            $user['email'] = 'test';
+            RegisterTest::register($test, $user);
             require_once('../utils/help.php');
             $messages = getMessages();
-            $this->waitForElementWithText('error', $messages['error_dublicating_user_info']);
+            $test->waitForElementWithText('error', $messages['error_dublicating_user_info']);
             $username = $this->user['username'];
             $this->user['email'] = $username . '@mydomain.com';
             $this->user['username'] = $username . '_new';
-            $this->waitForElementWithText('error', $messages['error_dublicating_user_info']);
+            RegisterTest::register($test, $user);
+            $test->waitForElementWithText('error', $messages['error_dublicating_user_info']);
         }
     }
 ?>

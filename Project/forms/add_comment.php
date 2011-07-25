@@ -40,6 +40,12 @@
             return false;
         }
         $user = findUserById($_SESSION['id']);
+        if(!isset($user['followers'])) {
+            $user['followers'] = array();
+        }
+        if(!isset($article['followers'])) {
+            $article['followers'] = array();
+        }
         notifyFollowers(array_unique($user['followers'] + $article['followers']) , $_SESSION['display_name'], $articleId);
         return true;
     }

@@ -99,6 +99,7 @@
             return FALSE;
         }
         $uploadResult = uploadFile();
+        var_dump($uploadResult);
         if('OK' != $uploadResult) {
             $_SESSION['avatar'] = FALSE;
             generateEditProfileForm($uploadResult);
@@ -114,7 +115,7 @@
         $newEmail = $update['email'];
         $users->update(array('_id' => $id), array('$set' => $update));
         updateEmail($oldEmail, $newEmail);
-        if($_SESSION['display_name'] != $update['display_name']) {
+        if($user['display_name'] != $update['display_name']) {
             updateDisplayName($update['display_name'], $id);
         }
         redirect2Home();

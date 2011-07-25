@@ -7,9 +7,7 @@
                 </span>
             </h1>
         </div>
-        <div id="article">
-            {$article.article}
-        </div>
+        <div id="article" class="preformated_text">{$article.article}</div>
         <br>
         <div id="article_details">
            <span class="{$block}">
@@ -60,11 +58,7 @@
             {strip}
             <tr class="{$tr_class}">
                 <td class="{$td_class}">
-                    <div class="{$comment_content}">
-                        <pre>
-                            {$comment.comment}
-                        </pre>
-                    </div>
+                    <div class="preformated_text">{$comment.comment}</div>
                     <div class="{$comment_info}">
                         {$author_msg} {$comment.publisher_name} 
                         {$published_date_msg} {$comment.published_date->sec|date_format:"h:i:s M d, Y"}

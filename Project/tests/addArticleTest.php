@@ -11,23 +11,23 @@
     
         public function testAddArticle() {
             $this->login('ivo','test');
-            $this->addArticle();
-            $this->checkArticle();
+            AddArticle::addArticle($this, $this->article);
+            AddArticle::checkArticle($this, $this->article);
 #            $this->viewArticle();
         }
 
-        private function addArticle() {
-            $this->click('add_article_link');
-            $this->type('article_title', $this->article['article_title']);
-            $this->type('article', $this->article['article']);
-            $this->selectElementWithLabel('province', $this->article['province']);
-            $this->selectElementWithLabel('categories', $this->article['tags']);
-            $this->clickAndWait('submit');        
+        public static function addArticle($test, $article) {
+            $test->click('add_article_link');
+            $test->type('article_title', $article['article_title']);
+            $test->type('article', $article['article']);
+            $test->selectElementWithLabel('province', $article['province']);
+            $test->selectElementWithLabel('categories', $article['tags']);
+            $test->clickAndWait('submit');        
         }
     
-        private function checkArticle() {
-            $this->waitForElementWithText('article_title', htmlspecialchars($this->article['article_title']));
-            $this->waitForElementWithText('article', htmlspecialchars($this->article['article']));
+        public static function checkArticle($test, $article) {
+            $test->waitForElementWithText('article_title', htmlspecialchars($article['article_title']));
+            $test->waitForElementWithText('article', htmlspecialchars($article['article']));
         }
     }
 ?>

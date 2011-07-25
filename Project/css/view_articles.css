@@ -83,3 +83,7 @@ input.follow:hover{
     margin: 7%;
     width: 86%;
 }
+
+.preformated_text {
+    white-space: pre-wrap;
+}
