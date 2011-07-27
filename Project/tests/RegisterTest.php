@@ -21,7 +21,7 @@
         public static function register($test, $user) {
             $test->click('login_sub_menu');
             $test->click('register');
-            $test->waitForElementVisible('username');
+            $test->waitForElementVisible('submit');
             $test->type('username', $user['username']);
             $test->type('password', $user['password']);
             $test->type('confirm_password', $user['password']);
@@ -41,9 +41,13 @@
             require_once('../utils/help.php');
             $messages = getMessages();
             $test->waitForElementWithText('error', $messages['error_dublicating_user_info']);
+
             $username = $this->user['username'];
-            $this->user['email'] = $username . '@mydomain.com';
-            $this->user['username'] = $username . '_new';
+            $user['email'] = $username . '@mydomain.com';
+            $user['username'] = $username . '_new';
+            // asserts that the register form will be reloaded - no timing problems
+            $test->click('home_link');
+            $test->waitForElementNotPresent('username');
             RegisterTest::register($test, $user);
             $test->waitForElementWithText('error', $messages['error_dublicating_user_info']);
         }

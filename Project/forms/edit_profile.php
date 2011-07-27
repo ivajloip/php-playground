@@ -95,7 +95,7 @@
         $users = $db->users;
         $update = parseEditInfoFromPost();
         if(NULL == $update) {
-            generateNewArticleForm($messages['error_required_value']);
+            generateEditProfileForm($messages['error_required_value']);
             return FALSE;
         }
         $uploadResult = uploadFile();

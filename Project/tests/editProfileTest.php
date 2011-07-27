@@ -21,15 +21,14 @@
         }
 
         public static function editProfile($test, $user) {
-            $test->click('edit_profile_link');
-            $test->type('password',$user['newPassword']);
-            $test->type('confirm_password',$user['confirm_password']);
-            $test->type('display_name',$user['display_name']);
+            $test->type('password', $user['newPassword']);
+            $test->type('confirm_password', $user['confirm_password']);
+            $test->type('display_name', $user['display_name']);
             $test->check('female');
-            $test->type('avatar',$user['avatar']);
+            $test->type('avatar', $user['avatar']);
 //            $test->check('moderator');
 //            $test->check('admin');
-            $test->check('active');
+            $test->check('is_active');
             $test->clickAndWait('submit');
         }
 
