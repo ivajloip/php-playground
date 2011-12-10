@@ -18,14 +18,15 @@ __За Ивайло
 	статия от там.
 ~Да се добави валидация (потребителско име - поне 3 символа, парола - поне 6).
 
-Да се оптимизират заявките за like/dislike, comment.
+Да може да се дава gps локация на описваното място (началото на пътуване).
+Да се записва на какъв език е статията в случай, че някой ден се стигне до многоезичие.
+Да се оптимизират заявките за like/dislike, comment. 
 Да се направи по един и същи начин да се взимат картинките в view_article и home.
 #По някакъв начин да се режат дългите редове - не може така да имаме редове по 1000 символа.
 #За датите да се използва нещото на смарти навсякъде :)
 
 __Неразпределени:
 #Следене на потребител и статия - да праща email-и (примерно да можеш да търсиш човек по username/email и да може да се добави за следене - да ти праща емейл като 	публикува нещо)
-
 
 __За Хриси:
 ~Автоматични тестове
@@ -119,3 +120,20 @@ db.categories.insert({'name' : 'Поход'});
 
 -- masterpiece
 db.articles.find({'comments.publisher_id' : ObjectId("4dfa76b2fcddd35b11000002")}).forEach( function(x) { t = x.comments; t != undefined && t.forEach(function(z) { z.publisher_id.toString() == ObjectId("4dfa76b2fcddd35b11000002").toString() && ( z.publisher_name = 'new' ); }); db.articles.save(x); }); 
+
+
+-- add function to like/dislike Articles
+db.system.js.save({_id: "dislikeArticle", value : function (articleId, userId) {
+    return db.articles.update({_id:articleId, disliked:{$ne:userId}}, {$inc:{liked_count:- db.articles.find({_id:articleId, liked:userId}).count(), disliked_count:1}, $pull:{liked:userId}, $addToSet:{disliked:userId}});
+    }});
+
+db.system.js.save({_id: "likeArticle", value : function (articleId, userId) {
+    return db.articles.update({_id:articleId, liked:{$ne:userId}}, {$inc:{disliked_count:- db.articles.find({_id:articleId, disliked:userId}).count(), liked_count:1}, $pull:{disliked:userId}, $addToSet:{liked:userId}});
+    }});
+
+-- get the first five comments from posts
+db.posts.find({}, {comments:{$slice: 5}})
+
+-- 
+t.find({}, {'x.y':1})
+{ "_id" : ObjectId("4c23f0486dad1c3a68457d20"), "x" : { "y" : 1 } }

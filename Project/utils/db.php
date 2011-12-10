@@ -119,12 +119,14 @@
     }
 
     function likeArticle($articleId, $userId) {
-        $article = findArticleById($articleId);
-        if(vote($article, 'liked', 'disliked', $userId)) {
-            $db = getConnection();
-            $articles = $db->articles;
-            save($articles, $article);
-        }
+        vote('likeArticle', $articleId, $userId);
+#        update(getConnection()->articles, array('_id' => new MongoId($id)), array('$addToSet' => array('liked' => $userId)));
+#        $article = findArticleById($articleId);
+#        if(vote($article, 'liked', 'disliked', $userId)) {
+#            $db = getConnection();
+#            $articles = $db->articles;
+#            save($articles, $article);
+#        }
     }
 
     function likeComment($articleId, $commentId, $userId) {
@@ -132,12 +134,16 @@
     }
 
     function dislikeArticle($articleId, $userId) {
+        vote('dislikeArticle', $articleId, $userId);
+/*        $db = getConnection();
+        $code = new MongoCode("dislikeArticle(articleId, userId)", array(articleId => new MongoId($articleId), userId => $userId));
+        return $db->execute($code);
         $article = findArticleById($articleId);
         if(vote($article, 'disliked', 'liked', $userId)) {
-            $db = getConnection();
             $articles = $db->articles;
             save($articles, $article);
         }
+*/        
     }
 
     function dislikeComment($articleId, $commentId, $userId) {
@@ -168,8 +174,12 @@
                             array('$addToSet' => array('followers' => $user['email'])));
     }
 
-    function vote(&$item, $forKey, $otherKey, $userId) {
-        $for = $item[$forKey];
+    function vote($functionName, $articleId, $userId) {
+        $db = getConnection();
+        $code = new MongoCode("$functionName(articleId, userId)", array(articleId => new MongoId($articleId), userId => $userId));
+        return $db->execute($code);
+
+/*        $for = $item[$forKey];
         if(in_array($userId, $for)) {
             return FALSE;
         }
@@ -181,7 +191,7 @@
 
         $item[$forKey][] = $userId;
         $item[$forKey . '_count'] += 1;
-        return $item;
+        return $item;*/
     }
 
     function findCommentById($comments, $commentId) {

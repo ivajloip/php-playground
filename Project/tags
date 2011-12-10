@@ -1,0 +1,263 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+SALT_LENGTH	utils/help.php	/^    define('SALT_LENGTH', 10);$/;"	d
+a	forms/edit_article.php	/^            $a = findArticleById($id);$/;"	v
+addCategory	forms/add_category.php	/^    function addCategory() {$/;"	f
+addImageTags	utils/help.php	/^    function addImageTags($text) {$/;"	f
+alphabet	forms/forgottenPass.php	/^		$alphabet=array("a","b","4","#","g","$","*","@","&","^","4","5","%");$/;"	v
+article	forms/add_article.php	/^        $article = parseArticleFromPost();$/;"	v
+article	forms/add_comment.php	/^        $article = findArticleById($articleId);$/;"	v
+article	forms/edit_article.php	/^        $article = findArticleById($_GET['id'], FALSE);$/;"	v
+article	forms/edit_article.php	/^        $article = parseArticleFromPost() + parseAdditionalFields();$/;"	v
+article	forms/view_article.php	/^    $article = findArticleById($article_id);$/;"	v
+article	utils/db.php	/^        $article = findArticleById($articleId);$/;"	v
+articleId	forms/add_comment.php	/^        $articleId = $_GET['id'];$/;"	v
+articleId	forms/like.php	/^    $articleId = $_POST['articleId'];$/;"	v
+article_id	forms/view_article.php	/^    $article_id = $_GET['id'];$/;"	v
+articles	forms/add_article.php	/^        $articles = $db->articles;$/;"	v
+articles	forms/add_comment.php	/^        $articles = $db->articles;$/;"	v
+articles	forms/edit_article.php	/^            $articles = $db->articles;$/;"	v
+articles	forms/find_article.php	/^        $articles = $db->articles;$/;"	v
+articles	forms/find_article.php	/^        $articles = searchForArticle();$/;"	v
+articles	forms/list_articles.php	/^    $articles = iterator_to_array(findAllActiveArticles());$/;"	v
+articles	utils/db.php	/^                $articles = $db->articles;$/;"	v
+articles	utils/db.php	/^            $articles = $db->articles;$/;"	v
+articles	utils/db.php	/^        $articles = $db->articles;$/;"	v
+articles	utils/db.php	/^        $articles = findAllActiveArticles();$/;"	v
+auth	utils/db.php	/^            $auth = $config['username'] . ':' . $config['password'] . '@';$/;"	v
+auth	utils/db.php	/^        $auth = "";$/;"	v
+body	utils/help.php	/^	        $body = $who . $messages['new_activity_message'] . generateArticleViewLink($articleId);$/;"	v
+categories	forms/add_category.php	/^        $categories = $db->categories;$/;"	v
+categories	forms/find_article.php	/^        $categories = findAllCategories();$/;"	v
+categories	utils/article_help.php	/^        $categories = iterator_to_array(findAllCategories());$/;"	v
+categoriesNames	utils/article_help.php	/^        $categoriesNames = array();$/;"	v
+categoriesSelected	forms/find_article.php	/^            $categoriesSelected = findCategoriesByIds($_POST['categories']);$/;"	v
+categoriesSelected	utils/article_help.php	/^        $categoriesSelected = findCategoriesByIds($_POST['categories']);$/;"	v
+category	forms/add_category.php	/^        $category = parseCategory();$/;"	v
+code	utils/db.php	/^        $code = new MongoCode("$functionName(articleId, userId)", array(articleId => new MongoId($articleId), userId => $userId));$/;"	v
+code	utils/db.php	/^        $code = new MongoCode("dislikeArticle(articleId, userId)", array(articleId => new MongoId($articleId), userId => $userId));$/;"	v
+comment	forms/add_comment.php	/^        $comment = parseCommentFromPost();$/;"	v
+commentId	forms/like.php	/^            $commentId = $_POST['commentId'];$/;"	v
+commentKey	utils/db.php	/^        $commentKey = findCommentById($comments, $commentId);$/;"	v
+comments	forms/add_comment.php	/^        $comments = $article['comments'];$/;"	v
+comments	forms/view_article.php	/^    $comments = $article['comments'];$/;"	v
+comments	utils/db.php	/^        $comments = $article['comments'];$/;"	v
+config	utils/db.php	/^        $config = parse_ini_file($config_file);$/;"	v
+conn	utils/db.php	/^        $conn = new Mongo('mongodb:\/\/' . $auth . $config['url'] . ':' . $config['port']);$/;"	v
+connect	utils/db.php	/^    function connect($config_file = '\/home\/project\/connection.ini') {$/;"	f
+db	forms/add_article.php	/^        $db = getConnection();$/;"	v
+db	forms/add_category.php	/^        $db = getConnection();$/;"	v
+db	forms/add_comment.php	/^        $db = getConnection();$/;"	v
+db	forms/edit_article.php	/^            $db = getConnection();$/;"	v
+db	forms/edit_profile.php	/^        $db = getConnection();$/;"	v
+db	forms/find_article.php	/^        $db = getConnection();$/;"	v
+db	forms/followUser.php	/^        $db = connect();$/;"	v
+db	forms/forgottenPass.php	/^		$db = connect();$/;"	v
+db	forms/login_form.php	/^        $db = connect();$/;"	v
+db	forms/register_form.php	/^        $db = getConnection();$/;"	v
+db	utils/db.php	/^                $db = getConnection();$/;"	v
+db	utils/db.php	/^            $db = connect();$/;"	v
+db	utils/db.php	/^        $db = getConnection();$/;"	v
+db	utils/db.php	/^    $db = NULL;$/;"	v
+dislikeArticle	utils/db.php	/^    function dislikeArticle($articleId, $userId) {$/;"	f
+dislikeComment	utils/db.php	/^    function dislikeComment($articleId, $commentId, $userId) {$/;"	f
+displayArticles	utils/article_help.php	/^    function displayArticles($articles, $error = NULL) {$/;"	f
+displayForgPassForm	forms/forgottenPass.php	/^	function displayForgPassForm(){$/;"	f
+displaySearchResults	forms/find_article.php	/^    function displaySearchResults() {$/;"	f
+displayUserToFollowForm	forms/followUser.php	/^	function displayUserToFollowForm($error = ''){$/;"	f
+display_name	utils/db.php	/^        $display_name = htmlspecialchars($display_name);$/;"	v
+editProfile	forms/edit_profile.php	/^    function editProfile() {$/;"	f
+error	forms/edit_article.php	/^            $error = $messages['error_item_not_found'];$/;"	v
+exec_if_not_logged	utils/help.php	/^                $exec_if_not_logged = redirect2Login, $exec_otherwise = redirect2Home) {$/;"	v
+fields	forms/find_article.php	/^        $fields = array('text_contained_in_title', 'text_contained_in_body',$/;"	v
+file	forms/home.php	/^        $file = getFile(getAvatarFileName($_SESSION['id']));$/;"	v
+file	forms/home.php	/^        $file = getFile(getAvatarFileName());$/;"	v
+file	forms/view_article.php	/^        $file = getFile(getAvatarFileName());$/;"	v
+file	forms/view_article.php	/^    $file = getFile(getAvatarFileName($article['publisher_id']));$/;"	v
+filePath	utils/help.php	/^                $filePath = getAvatarSaveLocation();$/;"	v
+fileTmpName	utils/help.php	/^                $fileTmpName = $_FILES['avatar']['tmp_name'];$/;"	v
+findAll	utils/db.php	/^    function findAll($collection) {$/;"	f
+findAllActive	utils/db.php	/^    function findAllActive($collection) {$/;"	f
+findAllActiveArticles	utils/db.php	/^    function findAllActiveArticles() {$/;"	f
+findAllArticles	utils/db.php	/^    function findAllArticles() {$/;"	f
+findAllCategories	utils/db.php	/^    function findAllCategories() {$/;"	f
+findAllProvinces	utils/db.php	/^    function findAllProvinces() {$/;"	f
+findAllUsers	utils/db.php	/^    function findAllUsers() {$/;"	f
+findArticleById	utils/db.php	/^    function findArticleById($id, $checkActive = TRUE) {$/;"	f
+findById	utils/db.php	/^    function findById($id, $collection, $checkActive = TRUE) {$/;"	f
+findByUniqueField	utils/db.php	/^    function findByUniqueField($fieldName, $fieldValue, $collection, $checkActive = TRUE) {$/;"	f
+findCategoriesByIds	utils/db.php	/^    function findCategoriesByIds($ids) {$/;"	f
+findCommentById	utils/db.php	/^    function findCommentById($comments, $commentId) {$/;"	f
+findFavouritesFiveArticles	utils/db.php	/^    function findFavouritesFiveArticles() {$/;"	f
+findItemsByIds	utils/db.php	/^    function findItemsByIds($collection, $ids) {$/;"	f
+findLatestFiveArticles	utils/db.php	/^    function findLatestFiveArticles() {$/;"	f
+findProvinceById	utils/db.php	/^    function findProvinceById($id) {$/;"	f
+findProvincesByIds	utils/db.php	/^    function findProvincesByIds($ids) {$/;"	f
+findTopNArticles	utils/db.php	/^    function findTopNArticles($field, $count, $order = -1) {$/;"	f
+findUserByEmail	utils/db.php	/^    function findUserByEmail($email, $checkActive = TRUE) {$/;"	f
+findUserById	utils/db.php	/^    function findUserById($id) {$/;"	f
+findUserByUniqueField	utils/db.php	/^    function findUserByUniqueField($fieldName, $fieldValue, $checkActive = TRUE) {$/;"	f
+findUserByUsername	utils/db.php	/^    function findUserByUsername($username, $checkActive = TRUE) {$/;"	f
+follow	utils/db.php	/^    function follow($itemId, $followerId, $collection) {$/;"	f
+followArticle	utils/db.php	/^    function followArticle($articleId, $followerId) {$/;"	f
+followUser	utils/db.php	/^    function followUser($userId, $followerId) {$/;"	f
+followUserOnSubmit	forms/followUser.php	/^	function followUserOnSubmit(){$/;"	f
+forgottenPassOnSubmit	forms/forgottenPass.php	/^	function forgottenPassOnSubmit() {$/;"	f
+from	utils/help.php	/^        $from = "Support <project.31222.80307@gmail.com>";$/;"	v
+generateArticleEditForm	forms/edit_article.php	/^    function generateArticleEditForm($error = '') {$/;"	f
+generateArticleForm	utils/article_help.php	/^    function generateArticleForm($page, $execAlso = NULL, $error = NULL) {$/;"	f
+generateArticleViewLink	utils/help.php	/^    function generateArticleViewLink($articleId) {$/;"	f
+generateEditProfileForm	forms/edit_profile.php	/^    function generateEditProfileForm($error = '') {$/;"	f
+generateHash	utils/db.php	/^    function generateHash($plain, $username, $salt = NULL) {$/;"	f
+generateLoginForm	forms/login_form.php	/^    function generateLoginForm($error = '') {$/;"	f
+generateNewArticleForm	forms/add_article.php	/^    function generateNewArticleForm($error = '') {$/;"	f
+generateNewPass	forms/forgottenPass.php	/^	function generateNewPass($alphabet, $length)$/;"	f
+generatePage	forms/add_category.php	/^    function generatePage($error = '') {$/;"	f
+generateProfileViewLink	utils/help.php	/^    function generateProfileViewLink($userId) {$/;"	f
+generateRegisterForm	forms/register_form.php	/^    function generateRegisterForm($error = '') {$/;"	f
+generateSearchForm	forms/find_article.php	/^    function generateSearchForm($error = '') {$/;"	f
+genericRequestHandler	utils/help.php	/^    function genericRequestHandler($exec_if_submit, $exe_if_logged_not_submitted, $/;"	f
+genericSmartyDisplay	utils/help.php	/^    function genericSmartyDisplay($vars, $page) {$/;"	f
+getAvatarFileName	utils/help.php	/^    function getAvatarFileName($id = 'no') {$/;"	f
+getAvatarSaveLocation	utils/help.php	/^    function getAvatarSaveLocation() {$/;"	f
+getConnection	utils/db.php	/^    function getConnection() {$/;"	f
+getFile	utils/db.php	/^    function getFile($fileName) {$/;"	f
+getId	forms/edit_profile.php	/^    function getId() {$/;"	f
+getMessages	utils/help.php	/^    function getMessages($filename = '..\/forms\/messages.ini') {$/;"	f
+getMessagesForArray	utils/help.php	/^    function getMessagesForArray($array) {$/;"	f
+getServerUrl	utils/help.php	/^    function getServerUrl() {$/;"	f
+grid	utils/db.php	/^        $grid = $db->getGridFS();$/;"	v
+headers	utils/help.php	/^        $headers = array ('From' => $from, 'To' => $to, 'Subject' => $subject);$/;"	v
+host	utils/help.php	/^        $host = "ssl:\/\/smtp.gmail.com";$/;"	v
+id	forms/add_article.php	/^        $id = $_POST['id'];$/;"	v
+id	forms/add_article.php	/^        $id = $article['_id'];$/;"	v
+id	forms/edit_article.php	/^        $id = $_POST['id'];$/;"	v
+id	forms/edit_profile.php	/^        $id = getId();$/;"	v
+insert	utils/db.php	/^    function insert($collection, $array, $safe = TRUE) {$/;"	f
+inserted	forms/add_article.php	/^        $inserted = insert($articles, $article);$/;"	v
+isAdmin	utils/help.php	/^    function isAdmin() {$/;"	f
+isEmpty	utils/help.php	/^    function isEmpty($str) {$/;"	f
+isFormSubmitted	utils/help.php	/^    function isFormSubmitted() {$/;"	f
+isLoggedIn	utils/help.php	/^    function isLoggedIn() {$/;"	f
+isModerator	utils/help.php	/^    function isModerator() {$/;"	f
+key	utils/help.php	/^        $key = array_search($value, $array);$/;"	v
+likeArticle	utils/db.php	/^    function likeArticle($articleId, $userId) {$/;"	f
+likeComment	utils/db.php	/^    function likeComment($articleId, $commentId, $userId) {$/;"	f
+limit	utils/help.php	/^        $limit = 200000;$/;"	v
+login	utils/help.php	/^    function login($id, $display_name, $admin = FALSE, $moderator = FALSE, $avatar = FALSE) {$/;"	f
+mail	utils/help.php	/^        $mail = $smtp->send($to, $headers, $body);$/;"	v
+markSelected	utils/article_help.php	/^    function markSelected(&$toMark, $in) {$/;"	f
+messages	forms/add_article.php	/^        $messages = getMessages();$/;"	v
+messages	forms/add_category.php	/^        $messages = getMessages();$/;"	v
+messages	forms/add_comment.php	/^        $messages = getMessages();$/;"	v
+messages	forms/edit_article.php	/^            $messages = getMessages();$/;"	v
+messages	forms/edit_article.php	/^        $messages = getMessages();$/;"	v
+messages	forms/find_article.php	/^            $messages = getMessages();$/;"	v
+messages	forms/followUser.php	/^			$messages = getMessages();$/;"	v
+messages	forms/like.php	/^        $messages = getMessages();$/;"	v
+messages	forms/login_form.php	/^        $messages = getMessages();$/;"	v
+messages	forms/register_form.php	/^        $messages = getMessages();$/;"	v
+messages	utils/help.php	/^	        $messages = getMessages();$/;"	v
+messages	utils/help.php	/^            $messages = parse_ini_file($filename);$/;"	v
+messages	utils/help.php	/^        $messages = getMessages();$/;"	v
+messages	utils/help.php	/^    $messages = NULL;$/;"	v
+newEmail	forms/edit_profile.php	/^        $newEmail = $update['email'];$/;"	v
+newPass	forms/forgottenPass.php	/^		$newPass=generateNewPass($alphabet,10);$/;"	v
+newPassHash	forms/forgottenPass.php	/^		$newPassHash=generateHash($newPass, $user['username']);$/;"	v
+notifyFollowers	utils/help.php	/^    function notifyFollowers($followers, $who, $articleId) {$/;"	f
+num	forms/forgottenPass.php	/^			$num=rand(0,count($alphabet)-1);$/;"	v
+oldEmail	forms/edit_profile.php	/^        $oldEmail = $user['email'];$/;"	v
+onSubmit	forms/add_comment.php	/^    function onSubmit() {$/;"	f
+parseAdditionalFields	forms/edit_article.php	/^    function parseAdditionalFields() {$/;"	f
+parseArticleFromPost	utils/article_help.php	/^    function parseArticleFromPost() {$/;"	f
+parseCategory	forms/add_category.php	/^    function parseCategory() {$/;"	f
+parseCommentFromPost	forms/add_comment.php	/^    function parseCommentFromPost() {$/;"	f
+parseEditInfoFromPost	forms/edit_profile.php	/^    function parseEditInfoFromPost() {$/;"	f
+parseSearchRequest	forms/find_article.php	/^    function parseSearchRequest() {$/;"	f
+parseUserAndPasswordFromPost	forms/login_form.php	/^    function parseUserAndPasswordFromPost() {$/;"	f
+parseUserRegInfo	forms/register_form.php	/^    function parseUserRegInfo() {$/;"	f
+password	utils/help.php	/^        $password = "222307password";$/;"	v
+port	utils/help.php	/^        $port = "465";$/;"	v
+province	utils/article_help.php	/^        $province = findProvinceById($_POST['province']);$/;"	v
+provinces	forms/find_article.php	/^        $provinces = findAllProvinces();$/;"	v
+provinces	utils/article_help.php	/^        $provinces = iterator_to_array(findAllProvinces());$/;"	v
+provincesSelected	forms/find_article.php	/^            $provincesSelected = findProvincesByIds($_POST['provinces']);$/;"	v
+query	forms/find_article.php	/^        $query = parseSearchRequest();$/;"	v
+query	utils/db.php	/^        $query = array($fieldName => $fieldValue);$/;"	v
+query	utils/db.php	/^        $query = array('followers' => $oldEmail);$/;"	v
+redirect2	utils/help.php	/^    function redirect2($path) {$/;"	f
+redirect2Home	utils/help.php	/^    function redirect2Home() {$/;"	f
+redirect2Login	utils/help.php	/^    function redirect2Login() {$/;"	f
+register_user	forms/register_form.php	/^    function register_user() {$/;"	f
+removeImageTags	utils/help.php	/^    function removeImageTags($text) {$/;"	f
+removeValueFromArray	utils/help.php	/^    function removeValueFromArray(array &$array, $value) {$/;"	f
+result	forms/edit_profile.php	/^        $result = array('email' => $_POST['email'], 'display_name' => $_POST['display_name']);$/;"	v
+result	forms/find_article.php	/^        $result = array();$/;"	v
+result	forms/login_form.php	/^        $result = $users->findOne(array('username' => $user['username'], 'password' => $user['password'], 'active' => true));$/;"	v
+result	utils/article_help.php	/^        $result = array('article' =>  addImageTags(htmlspecialchars($_POST['article'], ENT_QUOTES)), $/;"	v
+result	utils/help.php	/^        $result = array();$/;"	v
+salt	utils/db.php	/^             $salt = substr($salt, 0, SALT_LENGTH);$/;"	v
+salt	utils/db.php	/^             $salt = substr(md5($username), 0, SALT_LENGTH \/ 2) . substr(md5($plain), 0, SALT_LENGTH \/ 2);$/;"	v
+save	utils/db.php	/^    function save($collection, $array, $save = TRUE) {$/;"	f
+saveFile	utils/db.php	/^    function saveFile($filePath) {$/;"	f
+search	utils/db.php	/^        $search = array();$/;"	v
+searchForArticle	forms/find_article.php	/^    function searchForArticle() {$/;"	f
+sendMail	utils/help.php	/^    function sendMail($email, $subject, $body) {$/;"	f
+sendNewPasswdMail	utils/help.php	/^    function sendNewPasswdMail($email, $new_password) {$/;"	f
+setAdditionalVars	forms/edit_article.php	/^    function setAdditionalVars(&$vars, &$provinces, &$categories) {$/;"	f
+smarty	utils/help.php	/^        $smarty = new Smarty;$/;"	v
+smartyAssign	utils/help.php	/^    function smartyAssign($smarty, $assignArray) {$/;"	f
+smtp	utils/help.php	/^        $smtp =& Mail::factory('smtp', $/;"	v
+sortOrder	forms/find_article.php	/^            $sortOrder = array('liked_count' => -1);$/;"	v
+sortOrder	forms/find_article.php	/^            $sortOrder = array('published_date' => -1);$/;"	v
+subject	utils/help.php	/^	        $subject = $messages['new_activity_notification'];$/;"	v
+submitArticle	forms/add_article.php	/^    function submitArticle() {$/;"	f
+submitArticle	forms/edit_article.php	/^    function submitArticle() {$/;"	f
+submitComment	forms/add_comment.php	/^    function submitComment() {$/;"	f
+submitLogin	forms/login_form.php	/^    function submitLogin() {$/;"	f
+to	utils/help.php	/^        $to = $email;$/;"	v
+type	forms/like.php	/^    $type = $_POST['type'];$/;"	v
+type	utils/db.php	/^        $type = mime_content_type($filePath);$/;"	v
+update	forms/edit_profile.php	/^        $update = parseEditInfoFromPost();$/;"	v
+update	utils/db.php	/^    function update($collection, $query, $array, $safe = TRUE, $multiple = TRUE) {$/;"	f
+updateCollectionFollowers	utils/db.php	/^    function updateCollectionFollowers($findQuery, $newEmail, $collection) {$/;"	f
+updateDisplayName	utils/db.php	/^    function updateDisplayName($display_name, $id) {$/;"	f
+updateEmail	utils/db.php	/^    function updateEmail($oldEmail, $newEmail) {$/;"	f
+uploadFile	utils/help.php	/^    function uploadFile() {$/;"	f
+uploadResult	forms/edit_profile.php	/^        $uploadResult = uploadFile();$/;"	v
+user	forms/add_article.php	/^        $user = findUserById($_SESSION['id']);$/;"	v
+user	forms/add_comment.php	/^        $user = findUserById($_SESSION['id']);$/;"	v
+user	forms/edit_profile.php	/^        $user = findUserById($id);$/;"	v
+user	forms/forgottenPass.php	/^		$user=findUserByEmail($_POST['email']);$/;"	v
+user	forms/login_form.php	/^        $user = parseUserAndPasswordFromPost();$/;"	v
+user	forms/register_form.php	/^        $user = parseUserRegInfo();$/;"	v
+user	utils/db.php	/^        $user = findUserById($followerId);$/;"	v
+userId	forms/like.php	/^    $userId = $_SESSION['id'];$/;"	v
+userToFollow	forms/followUser.php	/^		$userToFollow=findUserByUsername($_POST['username']);$/;"	v
+username	utils/help.php	/^        $username = "project.31222.80307";$/;"	v
+users	forms/edit_profile.php	/^        $users = $db->users;$/;"	v
+users	forms/forgottenPass.php	/^		$users = $db->users;$/;"	v
+users	forms/list_users.php	/^    $users = findAllUsers();$/;"	v
+users	forms/login_form.php	/^        $users = $db->users;$/;"	v
+users	forms/register_form.php	/^        $users = $db->users;$/;"	v
+users	utils/db.php	/^        $users = $db->users;$/;"	v
+validate	forms/edit_profile.php	/^    function validate() {$/;"	f
+validate	forms/find_article.php	/^    function validate($array) {$/;"	f
+vars	forms/add_category.php	/^        $vars = getMessagesForArray(array('category', 'submit'));$/;"	v
+vars	forms/edit_profile.php	/^        $vars = getMessagesForArray(array('login', 'password', 'display_name',$/;"	v
+vars	forms/find_article.php	/^        $vars = getMessagesForArray(array('text_contained_in_body', 'publisher',$/;"	v
+vars	forms/followUser.php	/^		$vars = getMessagesForArray(array('username', 'submit'));$/;"	v
+vars	forms/forgottenPass.php	/^		$vars = getMessagesForArray(array('email', 'submit'));$/;"	v
+vars	forms/home.php	/^    $vars = getMessagesForArray(array('avatar'));$/;"	v
+vars	forms/list_users.php	/^    $vars = getMessagesForArray(array('username', 'display_name', 'email'));$/;"	v
+vars	forms/login_form.php	/^        $vars = getMessagesForArray($/;"	v
+vars	forms/register_form.php	/^        $vars = getMessagesForArray(array('login', 'password', $/;"	v
+vars	forms/view_article.php	/^    $vars = getMessagesForArray(array('comment_label', 'liked', 'disliked', $/;"	v
+vars	utils/article_help.php	/^        $vars = getMessagesForArray($/;"	v
+vars	utils/article_help.php	/^        $vars = getMessagesForArray(array('article_title', 'published_date', $/;"	v
+vote	utils/db.php	/^    function vote($functionName, $articleId, $userId) {$/;"	f
+voteForComment	utils/db.php	/^    function voteForComment($articleId, $commentId, $userId, $action, $anti_action) {$/;"	f
